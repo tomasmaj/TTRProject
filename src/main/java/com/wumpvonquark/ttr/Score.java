@@ -5,8 +5,9 @@ package main.java.com.wumpvonquark.ttr;
  */
 public class Score {
 
+    int score = 0;
+
     public int trainRouteScore(Route route) {
-        int score = 0;
         switch (route.getLength()) {
             case 1:
                 score = 1;
@@ -28,6 +29,26 @@ public class Score {
                 break;
             default: score = 0;
         }
+        return score;
+    }
+
+    public int ticketScore(TicketCard ticket) {
+        return ticket.getPoints();
+    }
+
+    public int routesSum(int[] routes) {
+        int routeSum = 0;
+        for (int route : routes) {
+            routeSum += trainRouteScore(new Route(route));
+        }
+        return routeSum;
+    }
+
+    public int total(int[] routes, TicketCard[] tickets) {
+        for (TicketCard ticket : tickets) {
+            score += ticket.getPoints();
+        }
+        score += routesSum(routes);
         return score;
     }
 }

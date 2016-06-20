@@ -22,19 +22,34 @@ public class ScoreTest {
     }
 
     @Test
-    public void scoreRouteOne() throws Exception {
+    public void scoreOneTileRoute() throws Exception {
         Route route = new Route(1);
         assertEquals(1, score.trainRouteScore(route));
     }
 
     @Test
-    public void scoreRouteThreee() throws Exception {
+    public void scoreThreeTilesRoute() throws Exception {
         Route route = new Route(3);
         assertEquals(4, score.trainRouteScore(route));
     }
 
     @Test
-    public void scoreBudapestToSofia() throws Exception {
-        assertEquals(5, TicketCard.BUD_SOF.getPoints());
+    public void scoreMultipleRoutes() throws Exception {
+        int[] routes = new int[] {6, 2, 3, 4, 1, 3};
+        assertEquals(33, score.routesSum(routes));
     }
+
+    @Test
+    public void scoreBudapestToSofia() throws Exception {
+        TicketCard ticket = TicketCard.BUD_SOF;
+        assertEquals(5, score.ticketScore(ticket));
+    }
+
+    @Test
+    public void scoreRouteAndTicketBudapestToSofia() throws Exception {
+        int[] routes = new int[] {3, 2};
+        TicketCard[] tickets = new TicketCard[] {TicketCard.BUD_SOF};
+        assertEquals(11, score.total(routes, tickets));
+    }
+
 }
