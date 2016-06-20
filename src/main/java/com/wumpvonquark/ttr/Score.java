@@ -3,11 +3,11 @@ package main.java.com.wumpvonquark.ttr;
 /**
  * Created by Kza von Quark on 2016-06-20.
  */
-public class Game {
+public class Score {
 
-    public int score(int numberOfTrains) {
+    public int trainRouteScore(Route route) {
         int score = 0;
-        switch (numberOfTrains) {
+        switch (route.getLength()) {
             case 1:
                 score = 1;
                 break;
