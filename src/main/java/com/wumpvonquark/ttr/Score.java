@@ -4,7 +4,7 @@ package main.java.com.wumpvonquark.ttr;
  * Created by Kza von Quark on 2016-06-20.
  */
 public class Score {
-
+/*
     public int routesSum(int[] routes) {
         int routeSum = 0;
         for (int route : routes) {
@@ -46,4 +46,5 @@ public class Score {
         }
         return ticketSum;
     }
+    */
 }

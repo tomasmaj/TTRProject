@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Kza von Quark on 2016-06-20.
  */
 public class ScoreTest {
-
+/*
     Score score;
     int[] routes;
     TicketCard[] tickets;
@@ -61,4 +61,5 @@ public class ScoreTest {
         tickets = new TicketCard[] {TicketCard.BUD_SOF, TicketCard.LON_BER};
         assertEquals(29, score.routesSum(routes) + score.ticketSum(tickets));
     }
+    */
 }
