@@ -14,17 +14,9 @@ public class Rules {
 
         return true;
 
-        /*while(true) {
-            for(Route route : playersRoutes) {
-                if(route.getCity1() == ticketToCheck.getStartCity() || route.getCity1() == ticketToCheck.getEndCity()) {
-                    return true;
-                }
-            }
-                return false;
-        }*/
     }
 
-    private boolean isCityInPlayerRoute(City city, List<Route> playerRoutes) {
+    public boolean isCityInPlayerRoute(City city, List<Route> playerRoutes) {
 
         for(Route route : playerRoutes) {
             if(route.getCity1() == city || route.getCity2() == city) {
@@ -34,5 +26,17 @@ public class Rules {
 
         return false;
 
+    }
+
+    public boolean isRoutesConnected(List<Route> routes) {
+        City tempCity = routes.get(0).getCity1();
+
+        for(Route route : routes) {
+            if(route.getCity1() != tempCity)
+                return false;
+            tempCity = route.getCity2();
+        }
+
+        return true;
     }
 }
