@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -22,7 +23,7 @@ public class RulesTest {
     }
 
     @Test
-    public void routeShouldBeEdingburghToAmsterdam() throws Exception {
+    public void routeShouldHaveLondonAndBerlin() throws Exception {
         Rules rules = new Rules();
         List<Route> routes = new ArrayList<>();
         routes.add(Route.EDI_LON_ORANGE);
