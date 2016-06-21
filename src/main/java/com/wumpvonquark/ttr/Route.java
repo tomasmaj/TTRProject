@@ -63,7 +63,8 @@ public enum Route {
     BER_WAR_YELLOW(City.BERLIN, City.WARSZAWA, 4, Color.YELLOW, 0, false),
     BER_WIE(City.BERLIN, City.WIEN, 3, Color.GREEN, 0, false),
     KOB_STO_YELLOW(City.KOBENHAVN, City.STOCKHOLM, 3, Color.YELLOW, 0, false),
-    KOB_STO_WHITE(City.KOBENHAVN, City.STOCKHOLM, 3, Color.WHITE, 0, false);
+    KOB_STO_WHITE(City.KOBENHAVN, City.STOCKHOLM, 3, Color.WHITE, 0, false),
+    STO_PET(City.STOCKHOLM, City.PETROGRAD, 8, Color.OPTIONAL, 0, true);
 
 
     private City[] cities;
