@@ -1,8 +1,7 @@
 package main.java.com.wumpvonquark.ttr;
 
-import sun.util.resources.cldr.fur.CalendarData_fur_IT;
 
-import javax.net.ssl.CertPathTrustManagerParameters;
+import com.sun.corba.se.impl.ior.OldPOAObjectKeyTemplate;
 
 /**
  * Created by Tomas Majling on 2016-06-20.
@@ -42,7 +41,30 @@ public enum Route {
     BAR_MAR(City.BARCELONA, City.MARSEILLE, 4, Color.OPTIONAL, 0, false),
     ESS_KOB_OPT1(City.ESSEN, City.KOBENHAVN, 3, Color.OPTIONAL, 1, false),
     ESS_KOB_OPT2(City.ESSEN, City.KOBENHAVN, 3, Color.OPTIONAL, 1, false),
-    ESS_BER(City.ESSEN, City.BERLIN, 2, Color.BLUE, 0, false);
+    ESS_BER(City.ESSEN, City.BERLIN, 2, Color.BLUE, 0, false),
+    ESS_FRA(City.ESSEN, City.FRANKFURT, 2, Color.GREEN, 0, false),
+    FRA_BER_RED(City.FRANKFURT, City.BERLIN, 3, Color.RED, 0, false),
+    FRA_BER_BLACK(City.FRANKFURT, City.BERLIN, 3, Color.BLACK, 0, false),
+    FRA_MUN(City.FRANKFURT, City.MUNCHEN, 2, Color.PINK, 0, false),
+    ZUR_MUN(City.ZURICH, City.MUNCHEN, 2, Color.YELLOW, 0, true),
+    ZUR_MAR(City.ZURICH, City.MARSEILLE, 2, Color.PINK, 0, true),
+    ZUR_VEN(City.ZURICH, City.VENEZIA, 2, Color.GREEN, 0, true),
+    MAR_ROM(City.MARSEILLE, City.ROMA, 4, Color.OPTIONAL, 0, true),
+    ROM_VEN(City.ROMA, City.VENEZIA, 2, Color.BLACK, 0, false),
+    ROM_BRI(City.ROMA, City.BRINDISI, 2, Color.WHITE, 0, false),
+    ROM_PAL(City.ROMA, City.PALERMO, 4, Color.OPTIONAL, 1, false),
+    PAL_BRI(City.PALERMO, City.BRINDISI, 3, Color.OPTIONAL, 1, false),
+    PAL_SMY(City.PALERMO, City.SMYRNA, 6, Color.OPTIONAL, 2, false),
+    BRI_ATH(City.BRINDISI, City.ATHINA, 4, Color.OPTIONAL, 1, false),
+    VEN_ZAG(City.VENEZIA, City.ZAGREB, 2, Color.OPTIONAL, 0, false),
+    MUN_WIE(City.MUNCHEN, City.WIEN, 3, Color.ORANGE, 0, false),
+    BER_DAN(City.BERLIN, City.DANZIG, 4, Color.OPTIONAL, 0, false),
+    BER_WAR_PINK(City.BERLIN, City.WARSZAWA, 4, Color.PINK, 0, false),
+    BER_WAR_YELLOW(City.BERLIN, City.WARSZAWA, 4, Color.YELLOW, 0, false),
+    BER_WIE(City.BERLIN, City.WIEN, 3, Color.GREEN, 0, false),
+    KOB_STO_YELLOW(City.KOBENHAVN, City.STOCKHOLM, 3, Color.YELLOW, 0, false),
+    KOB_STO_WHITE(City.KOBENHAVN, City.STOCKHOLM, 3, Color.WHITE, 0, false);
+
 
     private City city1;
     private City city2;
