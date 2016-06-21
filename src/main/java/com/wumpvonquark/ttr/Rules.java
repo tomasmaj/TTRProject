@@ -19,7 +19,7 @@ public class Rules {
     public boolean isCityInPlayerRoute(City city, List<Route> playerRoutes) {
 
         for(Route route : playerRoutes) {
-            if(route.getCity1() == city || route.getCity2() == city) {
+            if(route.getCities()[0] == city || route.getCities()[1] == city) {
                 return true;
             }
         }
@@ -29,12 +29,16 @@ public class Rules {
     }
 
     public boolean isRoutesConnected(List<Route> routes) {
-        City tempCity = routes.get(0).getCity1();
+        City endCity = routes.get(0).getCities()[1];
 
-        for(Route route : routes) {
-            if(route.getCity1() != tempCity)
+        for (int i = 1; i < routes.size(); i++) {
+            if(routes.get(i).getCities()[0] == endCity) {
+                endCity = routes.get(i).getCities()[1];
+            } else if(routes.get(i).getCities()[1] == endCity) {
+                endCity = routes.get(i).getCities()[0];
+            } else {
                 return false;
-            tempCity = route.getCity2();
+            }
         }
 
         return true;
