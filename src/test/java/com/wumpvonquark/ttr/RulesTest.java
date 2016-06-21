@@ -48,6 +48,10 @@ public class RulesTest {
     @Test
     public void routeIsConnectedWithDifferentStartAndEndCity() throws Exception {
         List<Route> routes = new ArrayList<>();
+        routes.add(Route.ESS_FRA);
+        routes.add(Route.AMS_FRA);
+        routes.add(Route.ESS_BER);
+        assertTrue(rules.isRoutesConnected(routes));
     }
 
     @Ignore
