@@ -22,21 +22,15 @@ public class ScoreTest {
     }
 
     @Test
-    public void scoreOneTileRoute() throws Exception {
+    public void scoreRouteOne() throws Exception {
         Route route = new Route(1);
         assertEquals(1, score.trainRouteScore(route));
     }
 
     @Test
-    public void scoreThreeTilesRoute() throws Exception {
+    public void scoreRouteThreee() throws Exception {
         Route route = new Route(3);
         assertEquals(4, score.trainRouteScore(route));
-    }
-
-    @Test
-    public void scoreMultipleRoutes() throws Exception {
-        int[] routes = new int[] {6, 2, 3, 4, 1, 3};
-        assertEquals(33, score.routesSum(routes));
     }
 
     @Test
