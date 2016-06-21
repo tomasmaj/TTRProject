@@ -66,28 +66,22 @@ public enum Route {
     KOB_STO_WHITE(City.KOBENHAVN, City.STOCKHOLM, 3, Color.WHITE, 0, false);
 
 
-    private City city1;
-    private City city2;
+    private City[] cities;
     private int length;
     private Color color;
     private int ferry;
     private boolean tunnel;
 
     Route(City city1, City city2, int length, Color color, int ferry, boolean tunnel) {
-        this.city1 = city1;
-        this.city2 = city2;
+        this.cities = new City[] {city1, city2};
         this.length = length;
         this.color = color;
         this.ferry = ferry;
         this.tunnel = tunnel;
     }
 
-    public City getCity1() {
-        return city1;
-    }
-
-    public City getCity2() {
-        return city2;
+    public City[] getCities() {
+        return cities;
     }
 
     public int getLength() {
