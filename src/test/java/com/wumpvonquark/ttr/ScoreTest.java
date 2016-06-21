@@ -41,15 +41,22 @@ public class ScoreTest {
 
     @Test
     public void scoreBudapestToSofia() throws Exception {
-        TicketCard ticket = TicketCard.BUD_SOF;
-        assertEquals(5, score.ticketScore(ticket));
+        int[] routes = {};
+        TicketCard[] tickets = {TicketCard.BUD_SOF};
+        assertEquals(5, score.routesSum(routes) + score.ticketSum(tickets));
     }
 
     @Test
     public void scoreRouteAndTicketBudapestToSofia() throws Exception {
         int[] routes = new int[] {3, 2};
         TicketCard[] tickets = new TicketCard[] {TicketCard.BUD_SOF};
-        assertEquals(11, score.total(routes, tickets));
+        assertEquals(11, score.routesSum(routes) + score.ticketSum(tickets));
     }
 
+    @Test
+    public void scoreMultipleTicketsAndRoutes() throws Exception {
+        TicketCard[] tickets = new TicketCard[] {TicketCard.BUD_SOF, TicketCard.LON_BER};
+        int[] routes = {3, 2, 2, 1, 3, 3};
+        assertEquals(29, score.routesSum(routes) + score.ticketSum(tickets));
+    }
 }
