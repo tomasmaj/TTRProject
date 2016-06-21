@@ -1,8 +1,5 @@
 package main.java.com.wumpvonquark.ttr;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by Tomas Majling on 2016-06-20.
  */
@@ -20,6 +17,7 @@ public enum City {
     BUDAPEST,
     CADIZ,
     CONSTANTINOPLE,
+    DANZIG,
     DIEPPE,
     EDINGBURGH,
     ESSEN,
@@ -33,12 +31,13 @@ public enum City {
     MADRID,
     MARSEILLE,
     MOSKVA,
+    MUNCHEN,
     PALERMO,
     PARIS,
     PAMPLONA,
     PETROGRAD,
     RIGA,
-    ROM,
+    ROMA,
     ROSTOV,
     SARAJEVO,
     SMOLENSK,
@@ -46,6 +45,7 @@ public enum City {
     SOFIA,
     STOCKHOLM,
     VENEZIA,
+    WARSZAWA,
     WIEN,
     WILNO,
     ZAGREB,
