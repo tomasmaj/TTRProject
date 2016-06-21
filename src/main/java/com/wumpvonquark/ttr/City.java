@@ -8,18 +8,42 @@ import java.util.List;
  */
 public enum City {
 
-    ATHINA, ANCORA, EDINGBURGH, ESSEN, KYIV, PARIS, WILNO, ZAGREB, BUDAPEST, SOFIA, BREST, VENEZIA,
-    CONSTANTINOPLE, ZURICH, KHARKOV, MADRID, BERLIN, MOSKVA, ERZURUM, ROSTOV, LONDON, FRANKFURT,
-    KOBENHAVN, PARLERMO, DIEPPE, AMSTERDAM, BRINDISI, SMOLENSK, FRANKFRUT, PETROGRAD, MARSEILLE, RIGA, BUCURESTI, WIEN,
-    STOCKHOLM(KOBENHAVN, PETROGRAD);
-
-    private City[] cities;
-
-    City(City... cities) {
-        this.cities = cities;
-    }
-
-    public City[] getCities() {
-        return cities;
-    }
+    ATHINA,
+    AMSTERDAM,
+    ANCORA,
+    BERLIN,
+    BRINDISI,
+    BREST,
+    BRUXELLES,
+    BUDAPEST,
+    EDINGBURGH,
+    ESSEN,
+    FRANKFURT,
+    KYIV,
+    PARIS,
+    WILNO,
+    ZAGREB,
+    SOFIA,
+    VENEZIA,
+    KOBENHAVN,
+    PALERMO,
+    ROM,
+    DIEPPE,
+    SMOLENSK,
+    SARAJEVO,
+    PETROGRAD,
+    MARSEILLE,
+    RIGA,
+    BUCURESTI,
+    WIEN,
+    CONSTANTINOPLE,
+    ZURICH,
+    KHARKOV,
+    MADRID,
+    MOSKVA,
+    ERZURUM,
+    ROSTOV,
+    LONDON,
+    SMYRNA,
+    STOCKHOLM;
 }
