@@ -2,6 +2,8 @@ package main.java.com.wumpvonquark.ttr;
 
 
 import com.sun.corba.se.impl.ior.OldPOAObjectKeyTemplate;
+import com.sun.org.apache.bcel.internal.generic.FALOAD;
+import org.junit.runners.BlockJUnit4ClassRunner;
 
 /**
  * Created by Tomas Majling on 2016-06-20.
@@ -64,8 +66,48 @@ public enum Route {
     BER_WIE(City.BERLIN, City.WIEN, 3, Color.GREEN, 0, false),
     KOB_STO_YELLOW(City.KOBENHAVN, City.STOCKHOLM, 3, Color.YELLOW, 0, false),
     KOB_STO_WHITE(City.KOBENHAVN, City.STOCKHOLM, 3, Color.WHITE, 0, false),
-    STO_PET(City.STOCKHOLM, City.PETROGRAD, 8, Color.OPTIONAL, 0, true);
-
+    STO_PET(City.STOCKHOLM, City.PETROGRAD, 8, Color.OPTIONAL, 0, true),
+    WIE_WAR(City.WIEN, City.WARSZAWA, 4, Color.BLUE, 0, false),
+    WIE_BUD_RED(City.WIEN, City.BUDAPEST, 1, Color.RED, 0, false),
+    WIE_BUD_WHITE(City.WIEN, City.BUDAPEST, 1, Color.WHITE, 0, false),
+    WIE_ZAG(City.WIEN, City.ZAGREB, 2, Color.OPTIONAL, 0, false),
+    ZAG_BUD(City.ZAGREB, City.BUDAPEST, 2, Color.ORANGE, 0, false),
+    ZAG_SAR(City.ZAGREB, City.SARAJEVO, 3, Color.RED, 0, false),
+    ATH_SAR(City.ATHINA, City.SARAJEVO, 4, Color.GREEN, 0, false),
+    ATH_SOF(City.ATHINA, City.SOFIA, 3, Color.PINK, 0, false),
+    ATH_SMY(City.ATHINA, City.SMYRNA, 2, Color.OPTIONAL, 1, false),
+    SAR_SOF(City.SARAJEVO, City.SOFIA, 2, Color.OPTIONAL, 0, true),
+    SAR_BUD(City.SARAJEVO, City.BUDAPEST, 3, Color.PINK, 0, false),
+    BUD_BUK(City.BUDAPEST, City.BUCURESTI, 4, Color.OPTIONAL, 0, true),
+    BUD_KYI(City.BUDAPEST, City.KYIV, 6, Color.OPTIONAL, 0, true),
+    WAR_DAN(City.WARSZAWA, City.DANZIG, 2, Color.OPTIONAL, 0, false),
+    WAR_WIL(City.WARSZAWA, City.WILNO, 3, Color.RED, 0, false),
+    WAR_KYI(City.WARSZAWA, City.KYIV, 4, Color.OPTIONAL, 0, false),
+    DAN_RIG(City.DANZIG, City.RIGA, 3, Color.BLACK, 0, false),
+    RIG_PET(City.RIGA, City.PETROGRAD, 4, Color.OPTIONAL, 0, false),
+    RIG_WIL(City.RIGA, City.WILNO, 4, Color.GREEN, 0, false),
+    WIL_PET(City.WILNO, City.PETROGRAD, 4, Color.BLUE, 0, false),
+    WIL_SMO(City.WILNO, City.SMOLENSK, 3, Color.YELLOW, 0, false),
+    WIL_KYI(City.WILNO, City.KYIV, 2, Color.OPTIONAL, 0, false),
+    KYI_SMO(City.KYIV, City.SMOLENSK, 3, Color.RED, 0, false),
+    KYI_KHA(City.KYIV, City.KHARKOV, 4, Color.OPTIONAL, 0, false),
+    KYI_BUC(City.KYIV, City.BUCURESTI, 4, Color.OPTIONAL, 0, false),
+    BUC_SEV(City.BUCURESTI, City.SEVASTOPOL, 4, Color.WHITE, 0, false),
+    BUC_CON(City.BUCURESTI, City.CONSTANTINOPLE, 3, Color.YELLOW, 0, false),
+    CON_SEV(City.CONSTANTINOPLE, City.SEVASTOPOL, 4, Color.OPTIONAL, 2, false),
+    CON_ANC(City.CONSTANTINOPLE, City.ANCORA, 2, Color.OPTIONAL, 0, true),
+    CON_SMY(City.CONSTANTINOPLE, City.SMYRNA, 2, Color.OPTIONAL, 0, true),
+    SMY_ANC(City.SMYRNA, City.ANCORA, 3, Color.ORANGE, 0, true),
+    ANC_ERZ(City.ANCORA, City.ERZURUM, 3, Color.BLACK, 0, false),
+    ERZ_SEV(City.ERZURUM, City.SEVASTOPOL, 4, Color.OPTIONAL, 2, false),
+    ERZ_SOC(City.ERZURUM, City.SOCHI, 3, Color.RED, 0, false),
+    SEV_SOC(City.SEVASTOPOL, City.SOCHI, 2, Color.OPTIONAL, 1, false),
+    SEV_ROS(City.SEVASTOPOL, City.ROSTOV, 4, Color.OPTIONAL, 0, false),
+    SOC_ROS(City.SOCHI, City.ROSTOV, 2, Color.OPTIONAL, 0, false),
+    ROS_KHA(City.ROSTOV, City.KHARKOV, 2, Color.GREEN, 0, false),
+    KHA_MOS(City.KHARKOV, City.MOSKVA, 4, Color.OPTIONAL, 0, false),
+    SMO_MOS(City.SMOLENSK, City.MOSKVA, 2, Color.ORANGE, 0, false),
+    MOS_PET(City.MOSKVA, City.PETROGRAD, 4, Color.WHITE, 0, false);
 
     private City[] cities;
     private int length;

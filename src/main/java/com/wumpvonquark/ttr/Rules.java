@@ -37,5 +37,4 @@ public class Rules {
                                 connectedCities.add(route.getCities()[0]);
                         }
                     }
-
 }
