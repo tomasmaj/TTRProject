@@ -40,6 +40,7 @@ public class ScoreTest {
     public void scoreRouteAndTicketBudapestToSofia() throws Exception {
         Route[] routes = {Route.SAR_BUD, Route.SAR_SOF};
         tickets = new TicketCard[] {TicketCard.BUD_SOF};
+        tickets[0].setValid(true);
         assertEquals(11, score.routesSum(routes) + score.ticketSum(tickets));
     }
 
@@ -47,6 +48,9 @@ public class ScoreTest {
     public void scoreMultipleTicketsAndRoutes() throws Exception {
         Route[] routes = {Route.KOB_STO_WHITE, Route.ZUR_MUN, Route.BRU_FRA, Route.DIE_PAR, Route.BRE_PAR, Route.ATH_SOF};
         tickets = new TicketCard[] {TicketCard.BUD_SOF, TicketCard.LON_BER};
+        for (TicketCard t : tickets) {
+            t.setValid(true);
+        }
         assertEquals(29, score.routesSum(routes) + score.ticketSum(tickets));
     }
 }
