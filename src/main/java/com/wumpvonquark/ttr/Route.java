@@ -67,23 +67,25 @@ public enum Route {
     STO_PET(City.STOCKHOLM, City.PETROGRAD, 8, Color.OPTIONAL, 0, true);
 
 
-    private City[] cities;
+    private City city1;
+    private City city2;
     private int length;
     private Color color;
     private int ferry;
     private boolean tunnel;
 
     Route(City city1, City city2, int length, Color color, int ferry, boolean tunnel) {
-        this.cities = new City[] {city1, city2};
+        this.city1 = city1;
+        this.city2 = city2;
         this.length = length;
         this.color = color;
         this.ferry = ferry;
         this.tunnel = tunnel;
     }
 
-    public City[] getCities() {
-        return cities;
-    }
+    public City getCity1() {return city1; }
+
+    public City getCity2() {return city2; }
 
     public int getLength() {
         return length;
