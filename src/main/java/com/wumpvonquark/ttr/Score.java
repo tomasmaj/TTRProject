@@ -1,20 +1,17 @@
 package main.java.com.wumpvonquark.ttr;
 
-/**
- * Created by Kza von Quark on 2016-06-20.
- */
 public class Score {
-/*
-    public int routesSum(int[] routes) {
+
+    public int routesSum(Route[] routes) {
         int routeSum = 0;
-        for (int route : routes) {
-            routeSum += routeScore(new Route(route));
+        for (Route route : routes) {
+            routeSum += routeScore(route);
         }
         return routeSum;
     }
 
         public int routeScore(Route route) {
-        int routeScore = 0;
+        int routeScore;
             switch (route.getLength()) {
                 case 1:
                     routeScore = 1;
@@ -42,9 +39,9 @@ public class Score {
     public int ticketSum(TicketCard[] tickets) {
         int ticketSum = 0;
         for (TicketCard ticket : tickets) {
-            ticketSum += ticket.getPoints();
+            if (ticket.isValid())
+                ticketSum += ticket.getPoints();
         }
         return ticketSum;
     }
-    */
 }

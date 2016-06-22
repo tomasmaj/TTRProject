@@ -1,8 +1,5 @@
 package main.java.com.wumpvonquark.ttr;
 
-/**
- * Created by Tomas Majling on 2016-06-20.
- */
 public enum TicketCard {
     ATH_ANG(City.ATHINA, City.ANCORA, 5),
     ATH_WIL(City.ATHINA, City.WILNO, 11),
@@ -32,11 +29,13 @@ public enum TicketCard {
     private City startCity;
     private City endCity;
     private int points;
+    private boolean valid;
 
     TicketCard(City startCity, City endCity, int points) {
         this.startCity = startCity;
         this.endCity = endCity;
         this.points = points;
+        this.valid = false;
     }
 
     public City getStartCity() {
@@ -50,4 +49,6 @@ public enum TicketCard {
     public int getPoints() {
         return points;
     }
+
+    public boolean isValid() { return valid; }
 }

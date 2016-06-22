@@ -9,13 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Kza von Quark on 2016-06-20.
- */
 public class ScoreTest {
-/*
+
     Score score;
-    int[] routes;
     TicketCard[] tickets;
 
     @Before
@@ -23,43 +19,34 @@ public class ScoreTest {
         score = new Score();
     }
 
-    @Test
+   @Test
     public void scoreOneTileRoute() throws Exception {
-        Route route = new Route(1);
-        assertEquals(1, score.routeScore(route));
+        assertEquals(1, score.routeScore(Route.AMS_BRU));
     }
 
     @Test
     public void scoreThreeTilesRoute() throws Exception {
-        Route route = new Route(3);
+        Route route = Route.PAR_FRA_WHITE;
         assertEquals(4, score.routeScore(route));
     }
 
     @Test
     public void scoreMultipleRoutes() throws Exception {
-        routes = new int[] {6, 2, 3, 4, 1, 3};
-        assertEquals(33, score.routesSum(routes));
-    }
-
-    @Test
-    public void scoreBudapestToSofia() throws Exception {
-        routes = new int[]{};
-        tickets = new TicketCard[] {TicketCard.BUD_SOF};
-        assertEquals(5, score.routesSum(routes) + score.ticketSum(tickets));
+        Route[] routes = {Route.AMS_FRA, Route.SMO_MOS, Route.STO_PET, Route.KOB_STO_WHITE, Route.BRI_ATH};
+        assertEquals(36, score.routesSum(routes));
     }
 
     @Test
     public void scoreRouteAndTicketBudapestToSofia() throws Exception {
-        routes = new int[] {3, 2};
+        Route[] routes = {Route.SAR_BUD, Route.SAR_SOF};
         tickets = new TicketCard[] {TicketCard.BUD_SOF};
         assertEquals(11, score.routesSum(routes) + score.ticketSum(tickets));
     }
 
     @Test
     public void scoreMultipleTicketsAndRoutes() throws Exception {
-        routes = new int[] {3, 2, 2, 1, 3, 3};
+        Route[] routes = {Route.KOB_STO_WHITE, Route.ZUR_MUN, Route.BRU_FRA, Route.DIE_PAR, Route.BRE_PAR, Route.ATH_SOF};
         tickets = new TicketCard[] {TicketCard.BUD_SOF, TicketCard.LON_BER};
         assertEquals(29, score.routesSum(routes) + score.ticketSum(tickets));
     }
-    */
 }

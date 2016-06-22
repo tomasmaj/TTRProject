@@ -5,9 +5,6 @@ import com.sun.corba.se.impl.ior.OldPOAObjectKeyTemplate;
 import com.sun.org.apache.bcel.internal.generic.FALOAD;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
-/**
- * Created by Tomas Majling on 2016-06-20.
- */
 public enum Route {
 
     EDI_LON_BLACK(City.EDINGBURGH, City.LONDON, 4, Color.BLACK, 0, false),
