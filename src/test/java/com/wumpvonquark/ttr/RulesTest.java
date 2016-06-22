@@ -1,11 +1,9 @@
 package test.java.com.wumpvonquark.ttr;
 
-import main.java.com.wumpvonquark.ttr.City;
 import main.java.com.wumpvonquark.ttr.Route;
 import main.java.com.wumpvonquark.ttr.Rules;
 import main.java.com.wumpvonquark.ttr.TicketCard;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class RulesTest {
         routes.add(Route.LON_AMS);
         routes.add(Route.ESS_BER);
         routes.add(Route.AMS_ESS);
-        assertTrue(rules.validateTicket(TicketCard.LON_BER, routes));
+        assertTrue(rules.isTicketValid(TicketCard.LON_BER, routes));
     }
 
     @Test
@@ -55,6 +53,6 @@ public class RulesTest {
         routes.add(Route.FRA_BER_RED);
         routes.add(Route.MAD_LIS);
         routes.add(Route.LIS_CAD);
-        assertTrue(rules.validateTicket(TicketCard.EDI_PAR, routes));
+        assertTrue(rules.isTicketValid(TicketCard.EDI_PAR, routes));
     }
 }
