@@ -1,9 +1,6 @@
 package test.java.com.wumpvonquark.ttr;
 
-import main.java.com.wumpvonquark.ttr.Color;
-import main.java.com.wumpvonquark.ttr.Deck;
-import main.java.com.wumpvonquark.ttr.TicketCard;
-import main.java.com.wumpvonquark.ttr.TrainCard;
+import main.java.com.wumpvonquark.ttr.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,17 +17,17 @@ public class DeckTest {
 
     @Before
     public void setUp() throws Exception {
-        deck = new Deck();
+        deck = new TicketDeck();
     }
 
     @Test
     public void deckCanHaveTicketCards() throws Exception {
-        deck.addCards(TicketCard.values());
-        Assert.assertEquals(Arrays.asList(TicketCard.values()), deck.getCards());
+        Assert.assertEquals(Arrays.asList(TicketCard.values()), deck.getDeck());
     }
 
     @Test
     public void deckCanHaveTrainCards() throws Exception {
-        TrainCard trainCard = new TrainCard(Color.BLUE);
+        // TrainCard trainCard = new TrainCard(Color.BLUE);
+        // deck.addCards(trainCard);
     }
 }
