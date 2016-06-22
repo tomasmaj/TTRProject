@@ -4,7 +4,6 @@ import main.java.com.wumpvonquark.ttr.City;
 import main.java.com.wumpvonquark.ttr.Route;
 import main.java.com.wumpvonquark.ttr.Rules;
 import main.java.com.wumpvonquark.ttr.TicketCard;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -28,30 +27,12 @@ public class RulesTest {
     }
 
     @Test
-    public void routeShouldHaveStartCityAndEndCityOnTicket() throws Exception {
-        List<Route> routes = new ArrayList<>();
-        routes.add(Route.LON_AMS);
-        routes.add(Route.ESS_BER);
-
-        assertTrue(rules.isCityInPlayerRoute(City.LONDON, routes));
-        assertTrue(rules.isCityInPlayerRoute(City.BERLIN, routes));
-    }
-
-    @Test
-    public void routesIsConnectedWithCityInLine() throws Exception {
-        List<Route> routes = new ArrayList<>();
-        routes.add(Route.EDI_LON_ORANGE);
-        routes.add(Route.LON_AMS);
-       // assertTrue(rules.isRoutesConnected(routes));
-    }
-
-    @Test
     public void routeIsConnectedWithDifferentStartAndEndCity() throws Exception {
         List<Route> routes = new ArrayList<>();
         routes.add(Route.LON_AMS);
         routes.add(Route.ESS_BER);
         routes.add(Route.AMS_ESS);
-        assertTrue(rules.isRoutesConnected(TicketCard.LON_BER, routes));
+        assertTrue(rules.validateTicket(TicketCard.LON_BER, routes));
     }
 
     @Test
@@ -74,17 +55,6 @@ public class RulesTest {
         routes.add(Route.FRA_BER_RED);
         routes.add(Route.MAD_LIS);
         routes.add(Route.LIS_CAD);
-        assertTrue(rules.isRoutesConnected(TicketCard.EDI_PAR, routes));
-    }
-
-    @Ignore
-    @Test
-    public void routeShouldHaveTicketsRoute() throws Exception {
-        List<Route> routes = new ArrayList<>();
-        routes.add(Route.LON_AMS);
-        routes.add(Route.AMS_ESS);
-        routes.add(Route.ESS_BER);
-
-        assertTrue(rules.checkRoute(TicketCard.BRE_VEN, routes));
+        assertTrue(rules.validateTicket(TicketCard.EDI_PAR, routes));
     }
 }
