@@ -7,33 +7,22 @@ import java.util.*;
  */
 public abstract class Deck<T> {
 
-    Stack<T> cards;
+    Stack<T> items;
 
-    /*List<TicketCard> cards;
-
-    public void addCards(TicketCard[] cards) {
-        this.cards = new ArrayList<>();
-        this.cards.addAll(Arrays.asList(cards));
-    }
-
-    public List<TicketCard> getCards() {
-        return cards;
-    }*/
-
-    public Deck(Stack<T> cards) {
-        this.cards = cards;
+    public Deck() {
+        this.items = new Stack<T>();
         generate();
-        //shuffle();
+        shuffle();
     }
 
     public Stack<T> getDeck() {
-        return cards;
+        return items;
     }
 
     public List<T> getCards(int numberOfCards) {
         List<T> drawnCards = new ArrayList<>();
         for (int i = 0; i < numberOfCards; i++) {
-            drawnCards.add(cards.pop());
+            drawnCards.add(items.pop());
         }
         return drawnCards;
     }
@@ -41,9 +30,7 @@ public abstract class Deck<T> {
     public abstract void generate();
 
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(items);
     }
-
-
 
 }

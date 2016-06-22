@@ -2,6 +2,7 @@ package main.java.com.wumpvonquark.ttr;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Tomas Majling on 2016-06-21.
@@ -33,4 +34,14 @@ public class Rules {
                             connectedCities.add(route.getCity1());
                     }
                 }
+
+    public int countTrainCardColor(Stack<TrainCard> deck, Color color) {
+        int numbersInDeck = 0;
+        for(TrainCard tc : deck) {
+            if(color.equals(tc.getColor())) {
+                numbersInDeck += 1;
+            }
+        }
+        return numbersInDeck;
+    }
 }
