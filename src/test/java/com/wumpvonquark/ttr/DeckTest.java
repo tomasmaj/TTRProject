@@ -53,7 +53,7 @@ public class DeckTest {
     @Test
     public void deckShouldNotContainDoubles() throws Exception {
         deck = new RouteDeck();
-        assertTrue(containsDoubles(deck.getDeck()));
+        assertTrue(containsDoubles2(deck.getDeck()));
     }
 
     private boolean containsDoubles(Stack<Route> deck) {
@@ -61,7 +61,7 @@ public class DeckTest {
         List<City> cities = new ArrayList<>();
         Color routeColor;
         List<Route> doubleRoutes = new ArrayList<>();
-        doubleRoutes = getDoubles(doubleRoutes);
+        doubleRoutes = getDoubles();
         City city1;
         City city2;
         for (Route route : deck) {
@@ -83,7 +83,21 @@ public class DeckTest {
         return true;
     }
 
-    private List<Route> getDoubles(List<Route> doubleRoutes) {
+    private boolean containsDoubles2(Stack<Route> deck) {
+
+        List<Route> doubles = getDoubles();
+
+        for(Route route : doubles) {
+            if(deck.contains(route) == false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private List<Route> getDoubles() {
+        List<Route> doubleRoutes = new ArrayList<>();
         doubleRoutes.add(Route.LON_DIE_OPT1);
         doubleRoutes.add(Route.LON_DIE_OPT2);
         doubleRoutes.add(Route.ESS_KOB_OPT1);
