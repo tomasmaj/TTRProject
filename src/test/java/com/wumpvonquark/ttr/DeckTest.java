@@ -8,9 +8,6 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Tomas Majling on 2016-06-22.
- */
 public class DeckTest {
 
     Deck deck;
@@ -53,7 +50,7 @@ public class DeckTest {
     @Test
     public void deckShouldNotContainDoubles() throws Exception {
         deck = new RouteDeck();
-        assertTrue(containsDoubles2(deck.getDeck()));
+        assertTrue(containsDoubles(deck.getDeck()));
     }
 
     private boolean containsDoubles(Stack<Route> deck) {
@@ -80,19 +77,6 @@ public class DeckTest {
             startPoint++;
             cities.clear();
         }
-        return true;
-    }
-
-    private boolean containsDoubles2(Stack<Route> deck) {
-
-        List<Route> doubles = getDoubles();
-
-        for(Route route : doubles) {
-            if(deck.contains(route) == false) {
-                return false;
-            }
-        }
-
         return true;
     }
 
