@@ -7,11 +7,11 @@ import main.java.com.wumpvonquark.ttr.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteComparator {
+public class Comparator {
 
     List<City> cities;
 
-    public boolean compare(Route routeToCheck, Route route) {
+    public boolean compareRoute(Route routeToCheck, Route route) {
         cities = new ArrayList<>();
         cities.add(routeToCheck.getCity1());
         cities.add(routeToCheck.getCity2());

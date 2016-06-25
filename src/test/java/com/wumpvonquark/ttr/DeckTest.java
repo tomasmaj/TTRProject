@@ -1,7 +1,7 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
-import main.java.com.wumpvonquark.ttr.utilities.RouteComparator;
+import main.java.com.wumpvonquark.ttr.utilities.Comparator;
 import org.junit.Test;
 
 import java.util.*;
@@ -49,17 +49,17 @@ public class DeckTest {
     }
 
     @Test
-    public void deckShouldNotContainDoubles() throws Exception {
+    public void deckOfRoutesShouldNotContainDoubles() throws Exception {
         deck = new RouteDeck();
-        assertTrue(deckShouldNotContainDoubles2(deck.getDeck()));
+        assertTrue(routesHasDoubles(deck.getDeck()));
     }
 
-    private boolean deckShouldNotContainDoubles2(Stack<Route> deck) {
-        RouteComparator rc = new RouteComparator();
+    private boolean routesHasDoubles(Stack<Route> deck) {
+        Comparator comp = new Comparator();
         int start = 1;
         for (Route route : deck) {
             for (int i = start; i < deck.size(); i++) {
-                if (rc.compare(route, deck.elementAt(i))) {
+                if (comp.compareRoute(route, deck.elementAt(i))) {
                     System.out.println(route.toString());
                     return false;
                 }
