@@ -1,6 +1,7 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
+import main.java.com.wumpvonquark.ttr.utilities.RouteComparator;
 import org.junit.Test;
 
 import java.util.*;
@@ -50,42 +51,21 @@ public class DeckTest {
     @Test
     public void deckShouldNotContainDoubles() throws Exception {
         deck = new RouteDeck();
-        assertTrue(containsDoubles(deck.getDeck()));
+        assertTrue(deckShouldNotContainDoubles2(deck.getDeck()));
     }
 
-    private boolean containsDoubles(Stack<Route> deck) {
-        int startPoint = 1;
-        List<City> cities = new ArrayList<>();
-        Color routeColor;
-        List<Route> doubleRoutes = new ArrayList<>();
-        doubleRoutes = getDoubles();
-        City city1;
-        City city2;
+    private boolean deckShouldNotContainDoubles2(Stack<Route> deck) {
+        RouteComparator rc = new RouteComparator();
+        int start = 1;
         for (Route route : deck) {
-            cities.add(route.getCity1());
-            cities.add(route.getCity2());
-            routeColor = route.getColor();
-            for (int i = startPoint; i < deck.size(); i++) {
-                city1 = deck.elementAt(i).getCity1();
-                city2 = deck.elementAt(i).getCity2();
-                Color color = deck.elementAt(i).getColor();
-                if (cities.contains(city1) && cities.contains(city2) && routeColor == color && !doubleRoutes.contains(route) && !doubleRoutes.contains(route)) {
-                    System.out.println(deck.elementAt(i).toString());
+            for (int i = start; i < deck.size(); i++) {
+                if (rc.compare(route, deck.elementAt(i))) {
+                    System.out.println(route.toString());
                     return false;
                 }
             }
-            startPoint++;
-            cities.clear();
+            start++;
         }
         return true;
-    }
-
-    private List<Route> getDoubles() {
-        List<Route> doubleRoutes = new ArrayList<>();
-        doubleRoutes.add(Route.LON_DIE_OPT1);
-        doubleRoutes.add(Route.LON_DIE_OPT2);
-        doubleRoutes.add(Route.ESS_KOB_OPT1);
-        doubleRoutes.add(Route.ESS_KOB_OPT2);
-        return doubleRoutes;
     }
 }
