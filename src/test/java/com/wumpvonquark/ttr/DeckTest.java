@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 public class DeckTest {
 
-    Deck deck;
-    Comparator comp;
+    private Deck deck;
+    private Comparator comp;
 
     @Before
     public void setUp() throws Exception {
@@ -59,16 +59,17 @@ public class DeckTest {
     @Test
     public void deckOfRoutesShouldNotContainDoubles() throws Exception {
         deck = new RouteDeck();
-        assertTrue(routesHasNoDoubles(deck.getDeck()));
+        assertTrue(routeDeckContainsNoDoubles(deck.getDeck()));
     }
 
-    private boolean routesHasNoDoubles(Stack<Route> deck) {
+    private boolean routeDeckContainsNoDoubles(Stack<Route> deck) {
         Comparator comp = new Comparator();
         int start = 1;
         for (Route route : deck) {
             for (int i = start; i < deck.size(); i++) {
-                if (comp.compareRoute(route, deck.elementAt(i))) {
+                if (comp.compareRoutes(route, deck.elementAt(i))) {
                     System.out.println(route.toString());
+                    System.out.println(deck.elementAt(i));
                     return false;
                 }
             }
@@ -80,27 +81,20 @@ public class DeckTest {
     @Test
     public void ticketShouldNotContainDoubles() throws Exception {
         deck = new TicketDeck();
-        assertTrue(ticketsHaveNoDoubles(deck.getDeck()));
+        assertTrue(ticketDeckContainsNoDoubles(deck.getDeck()));
         }
 
-    private boolean ticketsHaveNoDoubles(Stack<TicketCard> deck) {
-        List<City> cities1 = new ArrayList<>();
-        List<City> cities2 = new ArrayList<>();
+    private boolean ticketDeckContainsNoDoubles(Stack<TicketCard> deck) {
         int start = 1;
         for (TicketCard ticket : deck) {
-            cities1.add(ticket.getStartCity());
-            cities1.add(ticket.getEndCity());
             for (int i = start; i < deck.size(); i++) {
-                cities2.add(deck.elementAt(i).getStartCity());
-                cities2.add(deck.elementAt(i).getEndCity());
-                if (comp.isCitiesEqual(cities1, cities2)) {
+                if (comp.compareTickets(ticket, deck.elementAt(i))) {
                     System.out.println(ticket);
+                    System.out.println(deck.elementAt(i));
                     return false;
                 }
-                cities2.clear();
             }
             start++;
-            cities1.clear();
         }
         return true;
     }

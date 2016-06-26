@@ -2,15 +2,12 @@ package main.java.com.wumpvonquark.ttr;
 
 import java.util.*;
 
-/**
- * Created by Tomas Majling on 2016-06-22.
- */
 public abstract class Deck<T> {
 
     Stack<T> items;
 
-    public Deck() {
-        this.items = new Stack<T>();
+    Deck() {
+        this.items = new Stack<>();
         generate();
         shuffle();
     }
@@ -29,7 +26,7 @@ public abstract class Deck<T> {
 
     public abstract void generate();
 
-    public void shuffle() {
+    private void shuffle() {
         Collections.shuffle(items);
     }
 

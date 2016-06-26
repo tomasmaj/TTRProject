@@ -3,19 +3,20 @@ package main.java.com.wumpvonquark.ttr.utilities;
 
 import main.java.com.wumpvonquark.ttr.City;
 import main.java.com.wumpvonquark.ttr.Route;
+import main.java.com.wumpvonquark.ttr.TicketCard;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Comparator {
 
-    List<City> cities;
-    List<City> cities2;
+    private List<City> cities1;
+    private List<City> cities2;
 
-    public boolean compareRoute(Route routeToCheck, Route route) {
-        cities = new ArrayList<>();
-        cities.add(routeToCheck.getCity1());
-        cities.add(routeToCheck.getCity2());
+    public boolean compareRoutes(Route routeToCheck, Route route) {
+        cities1 = new ArrayList<>();
+        cities1.add(routeToCheck.getCity1());
+        cities1.add(routeToCheck.getCity2());
         cities2 = new ArrayList<>();
         cities2.add(route.getCity1());
         cities2.add(route.getCity2());
@@ -23,16 +24,24 @@ public class Comparator {
         if (isValidRouteDouble(routeToCheck))
             return false;
 
-        if (!isCitiesEqual(cities, cities2))
+        if (!isCitiesEqual(cities1, cities2))
             return false;
 
-        if (routeToCheck.getColor() != route.getColor())
-            return false;
-
-        return true;
+        return routeToCheck.getColor() == route.getColor();
     }
 
-    public boolean isCitiesEqual(List<City> cities, List<City> cities2) {
+    public boolean compareTickets(TicketCard ticket1, TicketCard ticket2) {
+        cities1 = new ArrayList<>();
+        cities1.add(ticket1.getStartCity());
+        cities1.add(ticket1.getEndCity());
+        cities2 = new ArrayList<>();
+        cities2.add(ticket2.getStartCity());
+        cities2.add(ticket2.getEndCity());
+
+        return isCitiesEqual(cities1, cities2);
+    }
+
+    private boolean isCitiesEqual(List<City> cities, List<City> cities2) {
         return cities.containsAll(cities2);
     }
 
@@ -49,7 +58,7 @@ public class Comparator {
         return doubleRoutes;
     }
 
-    public boolean compareCities(List<City> cities, City city1, City city2) {
-        return (cities.contains(city1) && cities.contains(city2));
-    }
+//    public boolean compareCities(List<City> cities, City city1, City city2) {
+//        return (cities.contains(city1) && cities.contains(city2));
+//    }
 }
