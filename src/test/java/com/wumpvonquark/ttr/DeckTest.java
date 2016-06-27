@@ -12,7 +12,6 @@ import static org.junit.Assert.assertTrue;
 
 public class DeckTest {
 
-    private Deck deck;
     private Comparator comp;
 
     @Before
@@ -23,43 +22,43 @@ public class DeckTest {
 
     @Test
     public void deckCanHaveTicketCards() throws Exception {
-        deck = new TicketDeck();
-        Collections.sort(deck.getDeck());
+        Deck<TicketCard> deck = new TicketDeck();
+        Collections.sort(deck.getAllItems());
         List<TicketCard> tc = Arrays.asList(TicketCard.values());
-        assertEquals(tc, deck.getDeck());
+        assertEquals(tc, deck.getAllItems());
     }
 
     @Test
     public void deckOfTrainCardsShouldBe110InSize() throws Exception {
-        deck = new TrainDeck();
-        assertEquals(110, deck.getDeck().size());
+        Deck<TrainCard> deck = new TrainDeck();
+        assertEquals(110, deck.getAllItems().size());
     }
 
     @Test
     public void deckOfTrainCardsShouldHaveRightNumberOfColors() throws Exception {
-        deck = new TrainDeck();
+        Deck<TrainCard> deck = new TrainDeck();
         Rules rules = new Rules();
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.BLACK));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.BLUE));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.GREEN));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.ORANGE));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.PINK));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.RED));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.WHITE));
-        assertEquals(12, rules.countTrainCardColor(deck.getDeck(), Color.YELLOW));
-        assertEquals(14, rules.countTrainCardColor(deck.getDeck(), Color.OPTIONAL));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.BLACK));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.BLUE));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.GREEN));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.ORANGE));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.PINK));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.RED));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.WHITE));
+        assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.YELLOW));
+        assertEquals(14, rules.countTrainCardColor(deck.getAllItems(), Color.OPTIONAL));
     }
 
     @Test
     public void deckOfRoutesShouldBeCorrectSize() throws Exception {
-        deck = new RouteDeck();
-        assertEquals(Route.values().length, deck.getDeck().size());
+        Deck<Route> deck = new RouteDeck();
+        assertEquals(Route.values().length, deck.getAllItems().size());
     }
 
     @Test
     public void deckOfRoutesShouldNotContainDoubles() throws Exception {
-        deck = new RouteDeck();
-        assertTrue(routeDeckContainsNoDoubles(deck.getDeck()));
+        Deck<Route> deck = new RouteDeck();
+        assertTrue(routeDeckContainsNoDoubles(deck.getAllItems()));
     }
 
     private boolean routeDeckContainsNoDoubles(Stack<Route> deck) {
@@ -80,8 +79,8 @@ public class DeckTest {
 
     @Test
     public void ticketShouldNotContainDoubles() throws Exception {
-        deck = new TicketDeck();
-        assertTrue(ticketDeckContainsNoDoubles(deck.getDeck()));
+        Deck<TicketCard> deck = new TicketDeck();
+        assertTrue(ticketDeckContainsNoDoubles(deck.getAllItems()));
         }
 
     private boolean ticketDeckContainsNoDoubles(Stack<TicketCard> deck) {

@@ -12,11 +12,11 @@ public abstract class Deck<T> {
         shuffle();
     }
 
-    public Stack<T> getDeck() {
+    public Stack<T> getAllItems() {
         return items;
     }
 
-    public List<T> getCards(int numberOfCards) {
+    public List<T> getItems(int numberOfCards) {
         List<T> drawnCards = new ArrayList<>();
         for (int i = 0; i < numberOfCards; i++) {
             drawnCards.add(items.pop());
