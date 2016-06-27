@@ -1,6 +1,7 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.TicketDeck;
+import main.java.com.wumpvonquark.ttr.TrainDeck;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,5 +20,10 @@ public class GameBoardTest {
     @Test
     public void shouldHaveTicketCards() throws Exception {
         Assert.assertTrue(gameBoard.getTicketDeck().containsAll(new TicketDeck().getAllItems()));
+    }
+
+    @Test
+    public void shouldHaveTrainCards() throws Exception {
+        gameBoard.getTrainDeck();
     }
 }
