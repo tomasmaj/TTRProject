@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static javafx.scene.input.KeyCode.T;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -57,39 +58,25 @@ public class DeckTest {
 
     @Test
     public void deckOfRoutesShouldNotContainDoubles() throws Exception {
-        Deck<Route> deck = new RouteDeck();
-        assertTrue(routeDeckContainsNoDoubles(deck.getAllItems()));
+        Deck deck = new RouteDeck();
+        assertTrue(deckContainsNoDoubles(deck));
     }
 
-    private boolean routeDeckContainsNoDoubles(Stack<Route> deck) {
-        Comparator comp = new Comparator();
-        int start = 1;
-        for (Route route : deck) {
-            for (int i = start; i < deck.size(); i++) {
-                if (comp.compareRoutes(route, deck.elementAt(i))) {
-                    System.out.println(route.toString());
-                    System.out.println(deck.elementAt(i));
-                    return false;
-                }
-            }
-            start++;
-        }
-        return true;
-    }
 
     @Test
     public void ticketShouldNotContainDoubles() throws Exception {
-        Deck<TicketCard> deck = new TicketDeck();
-        assertTrue(ticketDeckContainsNoDoubles(deck.getAllItems()));
+        Deck deck = new TicketDeck();
+        assertTrue(deckContainsNoDoubles(deck));
         }
 
-    private boolean ticketDeckContainsNoDoubles(Stack<TicketCard> deck) {
+     private boolean deckContainsNoDoubles(Deck deck) {
+        Stack<Item> itemDeck = deck.getAllItems();
         int start = 1;
-        for (TicketCard ticket : deck) {
-            for (int i = start; i < deck.size(); i++) {
-                if (comp.compareTickets(ticket, deck.elementAt(i))) {
-                    System.out.println(ticket);
-                    System.out.println(deck.elementAt(i));
+        for (Item item : itemDeck) {
+            for (int i = start; i < itemDeck.size(); i++) {
+                if (comp.compareDoubles(item, itemDeck.elementAt(i))) {
+                    System.out.println(item);
+                    System.out.println(itemDeck.elementAt(i));
                     return false;
                 }
             }

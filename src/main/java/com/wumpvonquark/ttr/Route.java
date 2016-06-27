@@ -1,11 +1,8 @@
 package main.java.com.wumpvonquark.ttr;
 
+import test.java.com.wumpvonquark.ttr.Item;
 
-import com.sun.corba.se.impl.ior.OldPOAObjectKeyTemplate;
-import com.sun.org.apache.bcel.internal.generic.FALOAD;
-import org.junit.runners.BlockJUnit4ClassRunner;
-
-public enum Route {
+public enum Route implements Item{
 
     EDI_LON_BLACK(City.EDINGBURGH, City.LONDON, 4, Color.BLACK, 0, false),
     EDI_LON_ORANGE(City.EDINGBURGH, City.LONDON, 4, Color.ORANGE, 0, false),
