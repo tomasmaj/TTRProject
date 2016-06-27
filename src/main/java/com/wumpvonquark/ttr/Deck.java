@@ -1,7 +1,5 @@
 package main.java.com.wumpvonquark.ttr;
 
-import test.java.com.wumpvonquark.ttr.Item;
-
 import java.util.*;
 
 public abstract class Deck<T> {

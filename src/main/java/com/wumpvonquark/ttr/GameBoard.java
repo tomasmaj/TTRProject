@@ -1,7 +1,16 @@
 package main.java.com.wumpvonquark.ttr;
 
-/**
- * Created by Kza von Quark on 2016-06-27.
- */
+import java.util.Stack;
+
 public class GameBoard {
+
+    private Stack<TicketCard> ticketDeck;
+
+    public GameBoard() {
+        this.ticketDeck = new TicketDeck().getAllItems();
+    }
+
+    public Stack<TicketCard> getTicketDeck() {
+        return ticketDeck;
+    }
 }

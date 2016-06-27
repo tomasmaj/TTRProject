@@ -4,7 +4,7 @@ package main.java.com.wumpvonquark.ttr.utilities;
 import main.java.com.wumpvonquark.ttr.City;
 import main.java.com.wumpvonquark.ttr.Route;
 import main.java.com.wumpvonquark.ttr.TicketCard;
-import test.java.com.wumpvonquark.ttr.Item;
+import main.java.com.wumpvonquark.ttr.Item;
 
 import java.util.ArrayList;
 import java.util.List;

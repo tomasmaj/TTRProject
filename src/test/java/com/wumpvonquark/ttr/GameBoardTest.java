@@ -1,16 +1,23 @@
 package test.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.TicketDeck;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import main.java.com.wumpvonquark.ttr.GameBoard;
 
-/**
- * Created by Kza von Quark on 2016-06-27.
- */
 public class GameBoardTest {
 
+    GameBoard gameBoard;
+
+    @Before
+    public void setUp() throws Exception {
+        gameBoard = new GameBoard();
+    }
+
     @Test
-    public void createNewGame() {
-        GameBoard gameBoard = new GameBoard();
+    public void shouldHaveTicketCards() throws Exception {
+        Assert.assertTrue(gameBoard.getTicketDeck().containsAll(new TicketDeck().getAllItems()));
     }
 }

@@ -1,7 +1,5 @@
 package main.java.com.wumpvonquark.ttr;
 
-import test.java.com.wumpvonquark.ttr.Item;
-
 public enum Route implements Item{
 
     EDI_LON_BLACK(City.EDINGBURGH, City.LONDON, 4, Color.BLACK, 0, false),

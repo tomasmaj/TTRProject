@@ -1,7 +1,5 @@
 package main.java.com.wumpvonquark.ttr;
 
-import test.java.com.wumpvonquark.ttr.Item;
-
 public enum TicketCard implements Item {
     ATH_ANG(City.ATHINA, City.ANCORA, 5),
     ATH_WIL(City.ATHINA, City.WILNO, 11),
