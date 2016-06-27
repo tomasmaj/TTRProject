@@ -9,6 +9,11 @@ import java.util.Stack;
  */
 public class Rules {
 
+    public static final int numberOfStartTrainCards = 2;
+    public static final int numberOfStartTicketCards = 4;
+    public static final int numberOfStartTrains = 45;
+    public static final int numberOfStartStations = 3;
+
     public boolean isTicketValid(TicketCard ticket, List<Route> routes) {
         return connectedCities(ticket.getStartCity(), routes).contains(ticket.getEndCity());
     }

@@ -1,29 +1,47 @@
 package main.java.com.wumpvonquark.ttr;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Stack;
 
 public class GameBoard {
 
-    private Stack<TicketCard> ticketDeck;
-    private Stack<TrainCard> trainDeck;
-    private Stack<Route> routeItems;
+    private final List<Player> players;
+    private Deck<TicketCard> ticketDeck;
+    private Deck<TrainCard> trainDeck;
+    private Deck<Route> routeItems;
 
-    public GameBoard() {
-        this.ticketDeck = new TicketDeck().getAllItems();
-        this.trainDeck = new TrainDeck().getAllItems();
-        this.routeItems = new RouteDeck().getAllItems();
+    public GameBoard(List<Player> players) {
+        this.players = players;
+        this.ticketDeck = new TicketDeck();
+        this.trainDeck = new TrainDeck();
+        this.routeItems = new RouteDeck();
     }
 
-    public Stack<TicketCard> getTicketDeck() {
+    public Deck<TicketCard> getTicketDeck() {
         return ticketDeck;
     }
 
-    public Stack<TrainCard> getTrainDeck() {
+    public Deck<TrainCard> getTrainDeck() {
         return trainDeck;
     }
 
-    public Stack<Route> getRouteItems() {
+    public Deck<Route> getRouteItems() {
         return routeItems;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void init() {
+
+        for(Player player : players) {
+            player.addCardToTrainDeck(this.trainDeck.getItems(Rules.numberOfStartTrainCards));
+            player.addCardToTicketDeck(this.ticketDeck.getItems(Rules.numberOfStartTicketCards));
+            player.addTrainsToTrainSet(new TrainSet().getItems(Rules.numberOfStartTrains));
+            player.addStationsToStationSet(new StationSet().getItems(Rules.numberOfStartStations));
+        }
+
     }
 }

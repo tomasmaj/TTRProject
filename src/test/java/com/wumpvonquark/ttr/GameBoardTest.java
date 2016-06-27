@@ -1,13 +1,16 @@
 package test.java.com.wumpvonquark.ttr;
 
-import main.java.com.wumpvonquark.ttr.RouteDeck;
-import main.java.com.wumpvonquark.ttr.TicketDeck;
-import main.java.com.wumpvonquark.ttr.TrainDeck;
+import main.java.com.wumpvonquark.ttr.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.com.wumpvonquark.ttr.GameBoard;
+import sun.security.krb5.internal.Ticket;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GameBoardTest {
 
@@ -15,21 +18,27 @@ public class GameBoardTest {
 
     @Before
     public void setUp() throws Exception {
-        gameBoard = new GameBoard();
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(new Player("PlayerName", Color.BLUE));
+        gameBoard = new GameBoard(playerList);
+        gameBoard.init();
     }
 
     @Test
-    public void shouldHaveTicketCards() throws Exception {
-        Assert.assertTrue(gameBoard.getTicketDeck().containsAll(new TicketDeck().getAllItems()));
+    public void shouldBePlayersInGame() throws Exception {
+        assertEquals("PlayerName", gameBoard.getPlayers().get(0).getName());
     }
 
     @Test
-    public void shouldHaveRouteItems() throws Exception {
-        Assert.assertTrue(gameBoard.getRouteItems().containsAll(new RouteDeck().getAllItems()));
+    public void playerTicketCardsShouldNotBeEmpty() throws Exception {
+        assertFalse(gameBoard.getPlayers().get(0).getTicketDeck().isEmpty());
     }
 
     @Test
-    public void shouldHaveTrainCards() throws Exception {
-        gameBoard.getTrainDeck();
+    public void playerShouldStartWithRightAmountOfItems() throws Exception {
+        assertEquals(Rules.numberOfStartTicketCards, gameBoard.getPlayers().get(0).getTicketDeck().size());
+        assertEquals(Rules.numberOfStartTrainCards, gameBoard.getPlayers().get(0).getTrainDeck().size());
+        assertEquals(Rules.numberOfStartTrains, gameBoard.getPlayers().get(0).getTrainSet().size());
+        assertEquals(Rules.numberOfStartStations, gameBoard.getPlayers().get(0).getStationSet().size());
     }
 }
