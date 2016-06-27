@@ -7,10 +7,12 @@ public class GameBoard {
 
     private Stack<TicketCard> ticketDeck;
     private Stack<TrainCard> trainDeck;
+    private Stack<Route> routeItems;
 
     public GameBoard() {
         this.ticketDeck = new TicketDeck().getAllItems();
         this.trainDeck = new TrainDeck().getAllItems();
+        this.routeItems = new RouteDeck().getAllItems();
     }
 
     public Stack<TicketCard> getTicketDeck() {
@@ -19,5 +21,9 @@ public class GameBoard {
 
     public Stack<TrainCard> getTrainDeck() {
         return trainDeck;
+    }
+
+    public Stack<Route> getRouteItems() {
+        return routeItems;
     }
 }
