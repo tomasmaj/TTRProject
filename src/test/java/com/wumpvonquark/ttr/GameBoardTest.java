@@ -1,6 +1,9 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
+import main.java.com.wumpvonquark.ttr.decks.Deck;
+import main.java.com.wumpvonquark.ttr.decks.TrainDeck;
+import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,4 +41,20 @@ public class GameBoardTest {
         assertEquals(Rules.numberOfStartTrains, gameBoard.getPlayers().get(0).getTrainSet().size());
         assertEquals(Rules.numberOfStartStations, gameBoard.getPlayers().get(0).getStationSet().size());
     }
+
+    @Test
+    public void addCardToPlayerTrainDeck() throws Exception {
+        List<TrainCard> tc = new ArrayList<>();
+        tc.add(gameBoard.getTrainDeck().getAllItems().get(0));
+        tc.add(gameBoard.getTrainDeck().getAllItems().get(2));
+        int gameBoardDeckSize = gameBoard.getTrainDeck().getAllItems().size();
+        int playerDeckSize = gameBoard.getPlayers().get(0).getTrainDeck().size();
+
+        gameBoard.dealCard(tc);
+
+        assertEquals(gameBoardDeckSize - tc.size(), gameBoard.getTrainDeck().getAllItems().size());
+        assertEquals(playerDeckSize + tc.size(), gameBoard.getPlayers().get(0).getTrainDeck().size());
+
+    }
+
 }

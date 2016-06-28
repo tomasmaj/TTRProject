@@ -47,4 +47,9 @@ public class GameBoard {
         }
 
     }
+
+    public void dealCard(List<TrainCard> tc) {
+        players.get(0).addCardToTrainDeck((tc));
+        trainDeck.getAllItems().removeAll(tc);
+    }
 }
