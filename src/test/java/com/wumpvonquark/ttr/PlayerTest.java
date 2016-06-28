@@ -29,7 +29,8 @@ public class PlayerTest {
 
     @Test
     public void playerShouldStartWithTwoCards() throws Exception {
-        Deck tr = new TrainDeck();
+        TrainDeck tr = new TrainDeck();
+        tr.generate();
         player.addCardToTrainDeck(tr.getItems(2));
         assertEquals(2, player.getTrainDeck().getAllItems().size());
     }
