@@ -1,6 +1,14 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
+import main.java.com.wumpvonquark.ttr.decks.Deck;
+import main.java.com.wumpvonquark.ttr.decks.RouteDeck;
+import main.java.com.wumpvonquark.ttr.decks.TicketDeck;
+import main.java.com.wumpvonquark.ttr.decks.TrainDeck;
+import main.java.com.wumpvonquark.ttr.items.Item;
+import main.java.com.wumpvonquark.ttr.items.Route;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
+import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import main.java.com.wumpvonquark.ttr.utilities.Comparator;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,19 +65,18 @@ public class DeckTest {
 
     @Test
     public void deckOfRoutesShouldNotContainDoubles() throws Exception {
-        Deck deck = new RouteDeck();
+        Deck<Route> deck = new RouteDeck();
         assertTrue(deckContainsNoDoubles(deck));
     }
 
-
     @Test
     public void ticketShouldNotContainDoubles() throws Exception {
-        Deck deck = new TicketDeck();
+        Deck<TicketCard> deck = new TicketDeck();
         assertTrue(deckContainsNoDoubles(deck));
         }
 
-     private boolean deckContainsNoDoubles(Deck deck) {
-        Stack<Item> itemDeck = deck.getAllItems();
+     private <T> boolean deckContainsNoDoubles(Deck<T> deck) {
+        Stack<Item> itemDeck = (Stack<Item>) deck.getAllItems();
         int start = 1;
         for (Item item : itemDeck) {
             for (int i = start; i < itemDeck.size(); i++) {

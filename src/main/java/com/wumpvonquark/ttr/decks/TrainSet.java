@@ -1,4 +1,8 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.decks;
+
+import main.java.com.wumpvonquark.ttr.Color;
+import main.java.com.wumpvonquark.ttr.Rules;
+import main.java.com.wumpvonquark.ttr.items.TrainPiece;
 
 public class TrainSet extends Deck<TrainPiece> {
 

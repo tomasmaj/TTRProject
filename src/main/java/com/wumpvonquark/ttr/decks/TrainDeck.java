@@ -1,10 +1,8 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.decks;
 
-import java.util.Stack;
+import main.java.com.wumpvonquark.ttr.Color;
+import main.java.com.wumpvonquark.ttr.items.TrainCard;
 
-/**
- * Created by Tomas Majling on 2016-06-22.
- */
 public class TrainDeck extends Deck<TrainCard> {
 
     @Override

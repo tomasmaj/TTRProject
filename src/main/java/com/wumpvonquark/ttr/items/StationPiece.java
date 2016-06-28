@@ -1,4 +1,6 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.items;
+
+import main.java.com.wumpvonquark.ttr.Color;
 
 public enum StationPiece implements Item {
 

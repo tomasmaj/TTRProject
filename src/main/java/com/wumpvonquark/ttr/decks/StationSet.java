@@ -1,8 +1,9 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.decks;
 
-/**
- * Created by Tomas Majling on 2016-06-27.
- */
+import main.java.com.wumpvonquark.ttr.Color;
+import main.java.com.wumpvonquark.ttr.Rules;
+import main.java.com.wumpvonquark.ttr.items.StationPiece;
+
 public class StationSet extends Deck<StationPiece> {
 
     private Color color;

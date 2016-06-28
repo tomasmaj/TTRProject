@@ -1,11 +1,8 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import sun.security.krb5.internal.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class GameBoardTest {
 
-    GameBoard gameBoard;
+    private GameBoard gameBoard;
 
     @Before
     public void setUp() throws Exception {

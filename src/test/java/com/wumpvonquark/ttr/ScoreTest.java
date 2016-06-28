@@ -1,18 +1,17 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.Score;
-import main.java.com.wumpvonquark.ttr.Route;
-import main.java.com.wumpvonquark.ttr.TicketCard;
+import main.java.com.wumpvonquark.ttr.items.Route;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ScoreTest {
 
-    Score score;
-    TicketCard[] tickets;
+    private Score score;
+    private TicketCard[] tickets;
 
     @Before
     public void setUp() throws Exception {

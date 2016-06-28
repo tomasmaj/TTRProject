@@ -1,7 +1,8 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.decks;
+
+import main.java.com.wumpvonquark.ttr.items.Route;
 
 import java.util.Arrays;
-import java.util.Stack;
 
 public class RouteDeck extends Deck<Route> {
 

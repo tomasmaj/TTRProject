@@ -2,9 +2,9 @@
 package main.java.com.wumpvonquark.ttr.utilities;
 
 import main.java.com.wumpvonquark.ttr.City;
-import main.java.com.wumpvonquark.ttr.Route;
-import main.java.com.wumpvonquark.ttr.TicketCard;
-import main.java.com.wumpvonquark.ttr.Item;
+import main.java.com.wumpvonquark.ttr.items.Route;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
+import main.java.com.wumpvonquark.ttr.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Comparator {
             return compareTickets((TicketCard)item, (TicketCard)item2);
     }
 
-    public boolean compareRoutes(Route routeToCheck, Route route) {
+    private boolean compareRoutes(Route routeToCheck, Route route) {
         cities1 = new ArrayList<>();
         cities1.add(routeToCheck.getCity1());
         cities1.add(routeToCheck.getCity2());
@@ -36,7 +36,8 @@ public class Comparator {
         return routeToCheck.getColor() == route.getColor();
     }
 
-    public boolean compareTickets(TicketCard ticket1, TicketCard ticket2) {
+
+    private boolean compareTickets(TicketCard ticket1, TicketCard ticket2) {
         cities1 = new ArrayList<>();
         cities1.add(ticket1.getStartCity());
         cities1.add(ticket1.getEndCity());

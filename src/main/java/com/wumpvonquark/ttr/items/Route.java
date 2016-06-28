@@ -1,4 +1,7 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.items;
+
+import main.java.com.wumpvonquark.ttr.City;
+import main.java.com.wumpvonquark.ttr.Color;
 
 public enum Route implements Item{
 

@@ -1,8 +1,7 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.items;
 
-/**
- * Created by Tomas Majling on 2016-06-22.
- */
+import main.java.com.wumpvonquark.ttr.Color;
+
 public class TrainCard {
 
     private Color color;

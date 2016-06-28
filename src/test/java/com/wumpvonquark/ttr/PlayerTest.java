@@ -1,17 +1,13 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.Color;
-import main.java.com.wumpvonquark.ttr.Deck;
+import main.java.com.wumpvonquark.ttr.decks.Deck;
 import main.java.com.wumpvonquark.ttr.Player;
-import main.java.com.wumpvonquark.ttr.TrainDeck;
-import org.junit.Assert;
+import main.java.com.wumpvonquark.ttr.decks.TrainDeck;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Tomas Majling on 2016-06-27.
- */
 public class PlayerTest {
 
     @Test

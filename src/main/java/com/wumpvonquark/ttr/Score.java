@@ -1,5 +1,8 @@
 package main.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.items.Route;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
+
 public class Score {
 
     public int routesSum(Route[] routes) {

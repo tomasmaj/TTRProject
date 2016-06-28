@@ -1,4 +1,4 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.decks;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ public abstract class Deck<T> {
         return drawnCards;
     }
 
-    public abstract void generate();
+    protected abstract void generate();
 
     private void shuffle() {
         Collections.shuffle(items);

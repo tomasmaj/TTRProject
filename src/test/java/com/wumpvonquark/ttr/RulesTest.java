@@ -1,23 +1,19 @@
 package test.java.com.wumpvonquark.ttr;
 
-import main.java.com.wumpvonquark.ttr.Route;
+import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.Rules;
-import main.java.com.wumpvonquark.ttr.TicketCard;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Tomas Majling on 2016-06-21.
- */
 public class RulesTest {
 
-    Rules rules;
+    private Rules rules;
 
     @Before
     public void setUp() throws Exception {

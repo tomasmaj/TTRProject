@@ -1,11 +1,13 @@
 package main.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.items.StationPiece;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
+import main.java.com.wumpvonquark.ttr.items.TrainCard;
+import main.java.com.wumpvonquark.ttr.items.TrainPiece;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tomas Majling on 2016-06-27.
- */
 public class Player {
 
     private final String name;

@@ -1,12 +1,13 @@
 package main.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.items.Route;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
+import main.java.com.wumpvonquark.ttr.items.TrainCard;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-/**
- * Created by Tomas Majling on 2016-06-21.
- */
 public class Rules {
 
     public static final int numberOfStartTrainCards = 2;
