@@ -3,6 +3,9 @@ package main.java.com.wumpvonquark.ttr.decks;
 import main.java.com.wumpvonquark.ttr.Color;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TrainDeck extends Deck<TrainCard> {
 
     @Override
@@ -16,6 +19,27 @@ public class TrainDeck extends Deck<TrainCard> {
             }
 
         }
+    }
+
+    public List<TrainCard> getCardsWithColor(Color color, int numberOfCards) {
+
+        List<TrainCard> trainCards = new ArrayList<>();
+        int counter = 0;
+
+        for(TrainCard tc : super.items) {
+            if(tc.getColor().equals(color)) {
+                trainCards.add(tc);
+                counter++;
+            }
+            if(numberOfCards == counter) {
+                System.out.println(super.items.size());
+                super.items.removeAll(trainCards);
+                System.out.println(super.items.size());
+                return trainCards;
+            }
+        }
+
+        return null;
     }
 
 }

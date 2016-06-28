@@ -8,8 +8,6 @@ public abstract class Deck<T> {
 
     Deck() {
         this.items = new Stack<>();
-        generate();
-        shuffle();
     }
 
     public Stack<T> getAllItems() {

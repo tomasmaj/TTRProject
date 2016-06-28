@@ -10,26 +10,29 @@ import java.util.List;
 public class GameBoard {
 
     private final List<Player> players;
-    private Deck<TicketCard> ticketDeck;
-    private Deck<TrainCard> trainDeck;
-    private Deck<Route> routeItems;
+    private TicketDeck ticketDeck;
+    private TrainDeck trainDeck;
+    private RouteDeck routeItems;
 
     public GameBoard(List<Player> players) {
         this.players = players;
         this.ticketDeck = new TicketDeck();
+        this.ticketDeck.generate();
         this.trainDeck = new TrainDeck();
+        this.trainDeck.generate();
         this.routeItems = new RouteDeck();
+        this.routeItems.generate();
     }
 
-    public Deck<TicketCard> getTicketDeck() {
+    public TicketDeck getTicketDeck() {
         return ticketDeck;
     }
 
-    public Deck<TrainCard> getTrainDeck() {
+    public TrainDeck getTrainDeck() {
         return trainDeck;
     }
 
-    public Deck<Route> getRouteItems() {
+    public RouteDeck getRouteItems() {
         return routeItems;
     }
 
@@ -39,16 +42,21 @@ public class GameBoard {
 
     public void init() {
 
+        TrainSet ts = new TrainSet();
+        ts.generate();
+        StationSet ss = new StationSet();
+        ss.generate();
+
         for(Player player : players) {
             player.addCardToTrainDeck(this.trainDeck.getItems(Rules.numberOfStartTrainCards));
             player.addCardToTicketDeck(this.ticketDeck.getItems(Rules.numberOfStartTicketCards));
-            player.addTrainsToTrainSet(new TrainSet().getItems(Rules.numberOfStartTrains));
-            player.addStationsToStationSet(new StationSet().getItems(Rules.numberOfStartStations));
+            player.addTrainsToTrainSet(ts.getItems(Rules.numberOfStartTrains));
+            player.addStationsToStationSet(ss.getItems(Rules.numberOfStartStations));
         }
 
     }
 
-    public void dealCard(List<TrainCard> tc) {
+    public void dealTrainCard(List<TrainCard> tc) {
         players.get(0).addCardToTrainDeck((tc));
         trainDeck.getAllItems().removeAll(tc);
     }

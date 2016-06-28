@@ -31,6 +31,6 @@ public class PlayerTest {
     public void playerShouldStartWithTwoCards() throws Exception {
         Deck tr = new TrainDeck();
         player.addCardToTrainDeck(tr.getItems(2));
-        assertEquals(2, player.getTrainDeck().size());
+        assertEquals(2, player.getTrainDeck().getAllItems().size());
     }
 }

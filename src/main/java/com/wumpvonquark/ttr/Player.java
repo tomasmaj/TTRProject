@@ -1,5 +1,9 @@
 package main.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.decks.StationSet;
+import main.java.com.wumpvonquark.ttr.decks.TicketDeck;
+import main.java.com.wumpvonquark.ttr.decks.TrainDeck;
+import main.java.com.wumpvonquark.ttr.decks.TrainSet;
 import main.java.com.wumpvonquark.ttr.items.StationPiece;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
@@ -12,37 +16,37 @@ public class Player {
 
     private final String name;
     private final Color color;
-    private List<TrainPiece> trainSet;
-    private List<TrainCard> trainDeck;
-    private List<TicketCard> ticketDeck;
-    private List<StationPiece> stationSet;
+    private TrainSet trainSet;
+    private TrainDeck trainDeck;
+    private TicketDeck ticketDeck;
+    private StationSet stationSet;
 
     public Player(String name, Color color) {
         this.name = name;
         this.color = color;
-        this.trainDeck = new ArrayList<>();
-        this.ticketDeck = new ArrayList<>();
-        this.trainSet = new ArrayList<>();
-        this.stationSet = new ArrayList<>();
+        this.trainDeck = new TrainDeck();
+        this.ticketDeck = new TicketDeck();
+        this.trainSet = new TrainSet();
+        this.stationSet = new StationSet();
     }
 
     public String getName() {
         return name;
     }
 
-    public List<TrainCard> getTrainDeck() {
+    public TrainDeck getTrainDeck() {
         return trainDeck;
     }
 
-    public List<TrainPiece> getTrainSet() {
+    public TrainSet getTrainSet() {
         return trainSet;
     }
 
-    public List<TicketCard> getTicketDeck() {
+    public TicketDeck getTicketDeck() {
         return ticketDeck;
     }
 
-    public List<StationPiece> getStationSet() {
+    public StationSet getStationSet() {
         return stationSet;
     }
 
@@ -51,18 +55,18 @@ public class Player {
     }
 
     public void addCardToTrainDeck(List<TrainCard> tc) {
-        this.trainDeck.addAll(tc);
+        this.trainDeck.getAllItems().addAll(tc);
     }
 
     public void addCardToTicketDeck(List<TicketCard> tc) {
-        this.ticketDeck.addAll(tc);
+        this.ticketDeck.getAllItems().addAll(tc);
     }
 
     public void addTrainsToTrainSet(List<TrainPiece> tp) {
-        this.trainSet.addAll(tp);
+        this.trainSet.getAllItems().addAll(tp);
     }
 
     public void addStationsToStationSet(List<StationPiece> sp) {
-        this.stationSet.addAll(sp);
+        this.stationSet.getAllItems().addAll(sp);
     }
 }
