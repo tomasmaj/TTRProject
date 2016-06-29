@@ -52,11 +52,13 @@ public class GameBoard {
     public void init() {
 
         TrainSet ts = new TrainSet();
-        ts.generate();
         StationSet ss = new StationSet();
-        ss.generate();
 
         for(Player player : players) {
+            ts.setColor(player.getColor());
+            ts.generate();
+            ss.setColor(player.getColor());
+            ss.generate();
             player.addCardToTrainDeck(this.trainDeck.getItems(Rules.numberOfStartTrainCards));
             player.addCardToTicketDeck(this.ticketDeck.getItems(Rules.numberOfStartTicketCards));
             player.addTrainsToTrainSet(ts.getItems(Rules.numberOfStartTrains));
@@ -66,7 +68,7 @@ public class GameBoard {
     }
 
     public void dealTrainCard(List<TrainCard> tc) {
-        players.get(0).addCardToTrainDeck((tc));
+        players.get(playersTurn).addCardToTrainDeck((tc));
         trainDeck.getAllItems().removeAll(tc);
     }
 
@@ -84,5 +86,12 @@ public class GameBoard {
     public int currentScoreBoard(List<Player> players) {
         Score score = new Score();
         return score.routesSum(players.get(0).getRouteDeck().getAllItems());
+    }
+
+    public void nextTurn() {
+        if(playersTurn == players.size() - 1)
+            this.playersTurn = 0;
+        else
+            this.playersTurn++;
     }
 }

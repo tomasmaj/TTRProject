@@ -94,6 +94,12 @@ public class GameBoardTest {
 
     }
 
+    @Test
+    public void whenPlayerTurnEndsGoToNextPlayer() throws Exception {
+        gameBoard.nextTurn();
+        assertEquals("PlayerName2", gameBoard.getPlayers().get(1).getName());
+    }
+
     private int getPlayerTrainDeckSize() {
         return player.getTrainDeck().getSize();
     }
