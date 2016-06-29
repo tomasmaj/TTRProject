@@ -100,6 +100,15 @@ public class GameBoardTest {
         assertEquals("PlayerName2", gameBoard.getPlayers().get(1).getName());
     }
 
+    @Test
+    public void checkIfGameIsOver() throws Exception {
+        player.getTrainSet().getItems(44);
+        gameBoard.nextTurn();
+        gameBoard.nextTurn();
+        boolean gameOver = gameBoard.nextTurn();
+        assertEquals(true, gameOver);
+    }
+
     private int getPlayerTrainDeckSize() {
         return player.getTrainDeck().getSize();
     }
