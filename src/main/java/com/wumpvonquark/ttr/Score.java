@@ -3,9 +3,11 @@ package main.java.com.wumpvonquark.ttr;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 
+import java.util.List;
+
 public class Score {
 
-    public int routesSum(Route[] routes) {
+    public int routesSum(List<Route> routes) {
         int routeSum = 0;
         for (Route route : routes) {
             routeSum += routeScore(route);

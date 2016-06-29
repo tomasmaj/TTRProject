@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class GameBoardTest {
 
     private GameBoard gameBoard;
+    Player player;
 
     @Before
     public void setUp() throws Exception {
@@ -22,24 +23,25 @@ public class GameBoardTest {
         playerList.add(new Player("PlayerName", Color.BLUE));
         gameBoard = new GameBoard(playerList);
         gameBoard.init();
+        player = player(0);
     }
 
     @Test
     public void shouldBePlayersInGame() throws Exception {
-        assertEquals("PlayerName", gameBoard.getPlayers().get(0).getName());
+        assertEquals("PlayerName", player(0).getName());
     }
 
     @Test
     public void playerTicketCardsShouldNotBeEmpty() throws Exception {
-        assertFalse(gameBoard.getPlayers().get(0).getTicketDeck().getAllItems().isEmpty());
+        assertFalse(player(0).getTicketDeck().getAllItems().isEmpty());
     }
 
     @Test
     public void playerShouldStartWithRightAmountOfItems() throws Exception {
-        assertEquals(Rules.numberOfStartTicketCards, gameBoard.getPlayers().get(0).getTicketDeck().getSize());
+        assertEquals(Rules.numberOfStartTicketCards, player(0).getTicketDeck().getSize());
         assertEquals(Rules.numberOfStartTrainCards, getPlayerTrainDeckSize());
-        assertEquals(Rules.numberOfStartTrains, gameBoard.getPlayers().get(0).getTrainSet().getSize());
-        assertEquals(Rules.numberOfStartStations, gameBoard.getPlayers().get(0).getStationSet().getSize());
+        assertEquals(Rules.numberOfStartTrains, player(0).getTrainSet().getSize());
+        assertEquals(Rules.numberOfStartStations, player(0).getStationSet().getSize());
     }
 
     @Test
@@ -59,7 +61,6 @@ public class GameBoardTest {
 
     @Test
     public void playerShouldClaimTrainRoute() throws Exception {
-        Player player = gameBoard.getPlayers().get(0);
         Route route = Route.AMS_ESS;
         player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 4));
         gameBoard.claimRoute(Route.AMS_ESS);
@@ -68,18 +69,40 @@ public class GameBoardTest {
 
     @Test
     public void usedTrainCardsShouldBeInGameBoardGarbagePile() throws Exception {
-        Player player = gameBoard.getPlayers().get(0);
         player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.RED, 4));
         List<TrainCard> usedTrainCards = player.getTrainDeck().getCardsWithColor(Color.RED, 4);
         gameBoard.addCardsToGarbageDeck(usedTrainCards);
         assertTrue(gameBoard.getTrainGarbagePile().getAllItems().containsAll(usedTrainCards));
     }
 
+    @Test
+    public void playerInGameScoreShouldBeOne() throws Exception {
+        player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
+        assertEquals(1, gameBoard.currentScoreBoard(gameBoard.getPlayers()));
+    }
+
+    @Test
+    public void playerInGameScoreShouldBeSumOfAllRoutes() throws Exception {
+        player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
+        player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
+        player.getRouteDeck().getAllItems().add(Route.MAD_LIS);
+        assertEquals(12, gameBoard.currentScoreBoard(gameBoard.getPlayers()));
+    }
+
+    @Test
+    public void shouldReturnPlayersWithHighestToLowestScore() throws Exception {
+
+    }
+
     private int getPlayerTrainDeckSize() {
-        return gameBoard.getPlayers().get(0).getTrainDeck().getSize();
+        return player.getTrainDeck().getSize();
     }
 
     private Stack<TrainCard> getAllItemsFromGameBoardTrainDeck() {
         return gameBoard.getTrainDeck().getAllItems();
+    }
+
+    private Player player(int index) {
+        return gameBoard.getPlayers().get(index);
     }
 }

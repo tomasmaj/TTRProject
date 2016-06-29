@@ -6,12 +6,18 @@ import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class ScoreTest {
 
     private Score score;
     private TicketCard[] tickets;
+
 
     @Before
     public void setUp() throws Exception {
@@ -32,7 +38,7 @@ public class ScoreTest {
     @Test
     public void scoreMultipleRoutes() throws Exception {
         Route[] routes = {Route.AMS_FRA, Route.SMO_MOS, Route.STO_PET, Route.KOB_STO_WHITE, Route.BRI_ATH};
-        assertEquals(36, score.routesSum(routes));
+        assertEquals(36, score.routesSum(Arrays.asList(routes)));
     }
 
     @Test
@@ -40,7 +46,7 @@ public class ScoreTest {
         Route[] routes = {Route.SAR_BUD, Route.SAR_SOF};
         tickets = new TicketCard[] {TicketCard.BUD_SOF};
         tickets[0].setValid(true);
-        assertEquals(11, score.routesSum(routes) + score.ticketSum(tickets));
+        assertEquals(11, score.routesSum(Arrays.asList(routes)) + score.ticketSum(tickets));
     }
 
     @Test
@@ -50,6 +56,6 @@ public class ScoreTest {
         for (TicketCard t : tickets) {
             t.setValid(true);
         }
-        assertEquals(29, score.routesSum(routes) + score.ticketSum(tickets));
+        assertEquals(29, score.routesSum(Arrays.asList(routes)) + score.ticketSum(tickets));
     }
 }

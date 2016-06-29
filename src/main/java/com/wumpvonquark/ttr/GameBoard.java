@@ -80,4 +80,9 @@ public class GameBoard {
         players.get(playersTurn).addRouteToRoutesDeck(route);
         routeItems.getAllItems().remove(route);
     }
+
+    public int currentScoreBoard(List<Player> players) {
+        Score score = new Score();
+        return score.routesSum(players.get(0).getRouteDeck().getAllItems());
+    }
 }

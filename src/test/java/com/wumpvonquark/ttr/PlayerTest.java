@@ -34,4 +34,6 @@ public class PlayerTest {
         player.addCardToTrainDeck(tr.getItems(2));
         assertEquals(2, player.getTrainDeck().getAllItems().size());
     }
+
+
 }
