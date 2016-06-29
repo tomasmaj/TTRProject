@@ -1,13 +1,7 @@
 package main.java.com.wumpvonquark.ttr;
 
-import main.java.com.wumpvonquark.ttr.decks.StationSet;
-import main.java.com.wumpvonquark.ttr.decks.TicketDeck;
-import main.java.com.wumpvonquark.ttr.decks.TrainDeck;
-import main.java.com.wumpvonquark.ttr.decks.TrainSet;
-import main.java.com.wumpvonquark.ttr.items.StationPiece;
-import main.java.com.wumpvonquark.ttr.items.TicketCard;
-import main.java.com.wumpvonquark.ttr.items.TrainCard;
-import main.java.com.wumpvonquark.ttr.items.TrainPiece;
+import main.java.com.wumpvonquark.ttr.decks.*;
+import main.java.com.wumpvonquark.ttr.items.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +14,7 @@ public class Player {
     private TrainDeck trainDeck;
     private TicketDeck ticketDeck;
     private StationSet stationSet;
+    private RouteDeck routeDeck;
 
     public Player(String name, Color color) {
         this.name = name;
@@ -28,7 +23,9 @@ public class Player {
         this.ticketDeck = new TicketDeck();
         this.trainSet = new TrainSet();
         this.stationSet = new StationSet();
+        this.routeDeck = new RouteDeck();
     }
+
 
     public String getName() {
         return name;
@@ -54,6 +51,10 @@ public class Player {
         return color;
     }
 
+    public RouteDeck getRouteDeck() {
+        return routeDeck;
+    }
+
     public void addCardToTrainDeck(List<TrainCard> tc) {
         this.trainDeck.getAllItems().addAll(tc);
     }
@@ -68,5 +69,9 @@ public class Player {
 
     public void addStationsToStationSet(List<StationPiece> sp) {
         this.stationSet.getAllItems().addAll(sp);
+    }
+
+    public void addRoutesToRouteDeck(List<Route> route) {
+        this.routeDeck.getAllItems().addAll(route);
     }
 }
