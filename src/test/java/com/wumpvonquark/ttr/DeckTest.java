@@ -30,7 +30,8 @@ public class DeckTest {
 
     @Test
     public void deckCanHaveTicketCards() throws Exception {
-        Deck<TicketCard> deck = new TicketDeck();
+        TicketDeck deck = new TicketDeck();
+        deck.generate();
         Collections.sort(deck.getAllItems());
         List<TicketCard> tc = Arrays.asList(TicketCard.values());
         assertEquals(tc, deck.getAllItems());
@@ -38,13 +39,15 @@ public class DeckTest {
 
     @Test
     public void deckOfTrainCardsShouldBe110InSize() throws Exception {
-        Deck<TrainCard> deck = new TrainDeck();
+        TrainDeck deck = new TrainDeck();
+        deck.generate();
         assertEquals(110, deck.getAllItems().size());
     }
 
     @Test
     public void deckOfTrainCardsShouldHaveRightNumberOfColors() throws Exception {
-        Deck<TrainCard> deck = new TrainDeck();
+        TrainDeck deck = new TrainDeck();
+        deck.generate();
         Rules rules = new Rules();
         assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.BLACK));
         assertEquals(12, rules.countTrainCardColor(deck.getAllItems(), Color.BLUE));
@@ -59,19 +62,22 @@ public class DeckTest {
 
     @Test
     public void deckOfRoutesShouldBeCorrectSize() throws Exception {
-        Deck<Route> deck = new RouteDeck();
+        RouteDeck deck = new RouteDeck();
+        deck.generate();
         assertEquals(Route.values().length, deck.getAllItems().size());
     }
 
     @Test
     public void deckOfRoutesShouldNotContainDoubles() throws Exception {
-        Deck<Route> deck = new RouteDeck();
+        RouteDeck deck = new RouteDeck();
+        deck.generate();
         assertTrue(deckContainsNoDoubles(deck));
     }
 
     @Test
     public void ticketShouldNotContainDoubles() throws Exception {
-        Deck<TicketCard> deck = new TicketDeck();
+        TicketDeck deck = new TicketDeck();
+        deck.generate();
         assertTrue(deckContainsNoDoubles(deck));
         }
 
