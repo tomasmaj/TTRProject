@@ -91,6 +91,14 @@ public class GameBoardTest {
 
     @Test
     public void shouldReturnPlayersWithHighestToLowestScore() throws Exception {
+        player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
+        player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
+        player.getRouteDeck().getAllItems().add(Route.MAD_LIS);
+        player(1).getRouteDeck().getAllItems().add(Route.LON_DIE_OPT1);
+        player(1).getRouteDeck().getAllItems().add(Route.PAM_BAR);
+        player(1).getRouteDeck().getAllItems().add(Route.BRU_FRA);
+        player(1).getRouteDeck().getAllItems().add(Route.WIE_BUD_RED);
+        assertEquals(player, gameBoard.currentScoreBoard(gameBoard.getPlayers()));
 
     }
 
