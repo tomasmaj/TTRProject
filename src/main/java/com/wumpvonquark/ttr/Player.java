@@ -71,7 +71,7 @@ public class Player {
         this.stationSet.getAllItems().addAll(sp);
     }
 
-    public void addRoutesToRouteDeck(List<Route> route) {
-        this.routeDeck.getAllItems().addAll(route);
+    public void addRouteToRoutesDeck(Route route) {
+        this.routeDeck.getAllItems().add(route);
     }
 }

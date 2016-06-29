@@ -13,9 +13,11 @@ public class GameBoard {
     private TicketDeck ticketDeck;
     private TrainDeck trainDeck, trainGarbagePile;
     private RouteDeck routeItems;
+    private int playersTurn;
 
     public GameBoard(List<Player> players) {
         this.players = players;
+        this.playersTurn = 0;
         this.ticketDeck = new TicketDeck();
         this.ticketDeck.generate();
         this.ticketDeck.shuffle();
@@ -70,5 +72,12 @@ public class GameBoard {
 
     public void addCardsToGarbageDeck(List<TrainCard> usedTrainCards) {
         this.trainGarbagePile.getAllItems().addAll(usedTrainCards);
+    }
+
+    public void claimRoute(Route route) {
+        List<TrainCard> tc = players.get(playersTurn).getTrainDeck().getCardsWithColor(route.getColor(), route.getLength());
+        addCardsToGarbageDeck(tc);
+        players.get(playersTurn).addRouteToRoutesDeck(route);
+        routeItems.getAllItems().remove(route);
     }
 }

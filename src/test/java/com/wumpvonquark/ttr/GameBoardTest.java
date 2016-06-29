@@ -1,6 +1,7 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
+import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,10 +60,10 @@ public class GameBoardTest {
     @Test
     public void playerShouldClaimTrainRoute() throws Exception {
         Player player = gameBoard.getPlayers().get(0);
+        Route route = Route.AMS_ESS;
         player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 4));
-        List<TrainCard> drawnCards = player.getTrainDeck().getCardsWithColor(Color.YELLOW, 3);
-        assertEquals(3 , player.getTrainDeck().getSize());
-        assertEquals(3, drawnCards.size());
+        gameBoard.claimRoute(Route.AMS_ESS);
+        assertTrue(player.getRouteDeck().getAllItems().contains(Route.AMS_ESS));
     }
 
     @Test
