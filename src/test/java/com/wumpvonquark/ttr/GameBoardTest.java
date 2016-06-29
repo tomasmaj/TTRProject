@@ -21,6 +21,7 @@ public class GameBoardTest {
     public void setUp() throws Exception {
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player("PlayerName", Color.BLUE));
+        playerList.add(new Player("PlayerName2", Color.RED));
         gameBoard = new GameBoard(playerList);
         gameBoard.init();
         player = player(0);
@@ -61,7 +62,6 @@ public class GameBoardTest {
 
     @Test
     public void playerShouldClaimTrainRoute() throws Exception {
-        Route route = Route.AMS_ESS;
         player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 4));
         gameBoard.claimRoute(Route.AMS_ESS);
         assertTrue(player.getRouteDeck().getAllItems().contains(Route.AMS_ESS));
