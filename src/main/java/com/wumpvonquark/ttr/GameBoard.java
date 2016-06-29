@@ -11,17 +11,20 @@ public class GameBoard {
 
     private final List<Player> players;
     private TicketDeck ticketDeck;
-    private TrainDeck trainDeck;
+    private TrainDeck trainDeck, trainGarbagePile;
     private RouteDeck routeItems;
 
     public GameBoard(List<Player> players) {
         this.players = players;
         this.ticketDeck = new TicketDeck();
         this.ticketDeck.generate();
+        this.ticketDeck.shuffle();
         this.trainDeck = new TrainDeck();
         this.trainDeck.generate();
+        this.trainDeck.shuffle();
         this.routeItems = new RouteDeck();
         this.routeItems.generate();
+        this.trainGarbagePile = new TrainDeck();
     }
 
     public TicketDeck getTicketDeck() {
@@ -38,6 +41,10 @@ public class GameBoard {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public TrainDeck getTrainGarbagePile() {
+        return trainGarbagePile;
     }
 
     public void init() {
@@ -59,5 +66,9 @@ public class GameBoard {
     public void dealTrainCard(List<TrainCard> tc) {
         players.get(0).addCardToTrainDeck((tc));
         trainDeck.getAllItems().removeAll(tc);
+    }
+
+    public void addCardsToGarbageDeck(List<TrainCard> usedTrainCards) {
+        this.trainGarbagePile.getAllItems().addAll(usedTrainCards);
     }
 }

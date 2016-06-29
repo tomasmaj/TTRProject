@@ -22,9 +22,13 @@ public abstract class Deck<T> {
         return drawnCards;
     }
 
+    public int getSize() {
+        return this.getAllItems().size();
+    }
+
     protected abstract void generate();
 
-    private void shuffle() {
+    public void shuffle() {
         Collections.shuffle(items);
     }
 

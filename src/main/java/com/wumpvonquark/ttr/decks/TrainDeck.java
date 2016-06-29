@@ -32,9 +32,7 @@ public class TrainDeck extends Deck<TrainCard> {
                 counter++;
             }
             if(numberOfCards == counter) {
-                System.out.println(super.items.size());
                 super.items.removeAll(trainCards);
-                System.out.println(super.items.size());
                 return trainCards;
             }
         }

@@ -25,7 +25,6 @@ public class DeckTest {
     @Before
     public void setUp() throws Exception {
         comp = new Comparator();
-
     }
 
     @Test

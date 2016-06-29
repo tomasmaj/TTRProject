@@ -1,13 +1,13 @@
 package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
-import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import static org.junit.Assert.*;
 
@@ -35,35 +35,50 @@ public class GameBoardTest {
 
     @Test
     public void playerShouldStartWithRightAmountOfItems() throws Exception {
-        assertEquals(Rules.numberOfStartTicketCards, gameBoard.getPlayers().get(0).getTicketDeck().getAllItems().size());
-        assertEquals(Rules.numberOfStartTrainCards, gameBoard.getPlayers().get(0).getTrainDeck().getAllItems().size());
-        assertEquals(Rules.numberOfStartTrains, gameBoard.getPlayers().get(0).getTrainSet().getAllItems().size());
-        assertEquals(Rules.numberOfStartStations, gameBoard.getPlayers().get(0).getStationSet().getAllItems().size());
+        assertEquals(Rules.numberOfStartTicketCards, gameBoard.getPlayers().get(0).getTicketDeck().getSize());
+        assertEquals(Rules.numberOfStartTrainCards, getPlayerTrainDeckSize());
+        assertEquals(Rules.numberOfStartTrains, gameBoard.getPlayers().get(0).getTrainSet().getSize());
+        assertEquals(Rules.numberOfStartStations, gameBoard.getPlayers().get(0).getStationSet().getSize());
     }
 
     @Test
     public void addCardToPlayerTrainDeck() throws Exception {
         List<TrainCard> tc = new ArrayList<>();
-        tc.add(gameBoard.getTrainDeck().getAllItems().get(0));
-        tc.add(gameBoard.getTrainDeck().getAllItems().get(2));
-        int gameBoardDeckSize = gameBoard.getTrainDeck().getAllItems().size();
-        int playerDeckSize = gameBoard.getPlayers().get(0).getTrainDeck().getAllItems().size();
+        tc.add(getAllItemsFromGameBoardTrainDeck().get(0));
+        tc.add(getAllItemsFromGameBoardTrainDeck().get(2));
+        int gameBoardDeckSize = gameBoard.getTrainDeck().getSize();
+        int playerDeckSize = getPlayerTrainDeckSize();
 
         gameBoard.dealTrainCard(tc);
 
-        assertEquals(gameBoardDeckSize - tc.size(), gameBoard.getTrainDeck().getAllItems().size());
-        assertEquals(playerDeckSize + tc.size(), gameBoard.getPlayers().get(0).getTrainDeck().getAllItems().size());
+        assertEquals(gameBoardDeckSize - tc.size(), getAllItemsFromGameBoardTrainDeck().size());
+        assertEquals(playerDeckSize + tc.size(), getPlayerTrainDeckSize());
 
     }
 
     @Test
     public void playerShouldClaimTrainRoute() throws Exception {
-        gameBoard.getPlayers().get(0).addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 4));
+        Player player = gameBoard.getPlayers().get(0);
+        player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 4));
+        List<TrainCard> drawnCards = player.getTrainDeck().getCardsWithColor(Color.YELLOW, 3);
+        assertEquals(3 , player.getTrainDeck().getSize());
+        assertEquals(3, drawnCards.size());
+    }
 
-        List<TrainCard> gameBoardTc = gameBoard.getPlayers().get(0).getTrainDeck().getCardsWithColor(Color.YELLOW, 3);
+    @Test
+    public void usedTrainCardsShouldBeInGameBoardGarbagePile() throws Exception {
+        Player player = gameBoard.getPlayers().get(0);
+        player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.RED, 4));
+        List<TrainCard> usedTrainCards = player.getTrainDeck().getCardsWithColor(Color.RED, 4);
+        gameBoard.addCardsToGarbageDeck(usedTrainCards);
+        assertTrue(gameBoard.getTrainGarbagePile().getAllItems().containsAll(usedTrainCards));
+    }
 
-        assertEquals(3 ,gameBoard.getPlayers().get(0).getTrainDeck().getAllItems().size());
-        assertEquals(3, gameBoardTc.size());
+    private int getPlayerTrainDeckSize() {
+        return gameBoard.getPlayers().get(0).getTrainDeck().getSize();
+    }
 
+    private Stack<TrainCard> getAllItemsFromGameBoardTrainDeck() {
+        return gameBoard.getTrainDeck().getAllItems();
     }
 }
