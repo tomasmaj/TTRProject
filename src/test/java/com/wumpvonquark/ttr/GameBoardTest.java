@@ -2,9 +2,9 @@ package test.java.com.wumpvonquark.ttr;
 
 import main.java.com.wumpvonquark.ttr.*;
 import main.java.com.wumpvonquark.ttr.items.Route;
+import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class GameBoardTest {
     @Test
     public void playerInGameScoreShouldBeOne() throws Exception {
         player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
-        assertEquals(1, gameBoard.currentScoreBoard(gameBoard.getPlayers()).get(0).getScore());
+        assertEquals(1, gameBoard.currentScore(gameBoard.getPlayers()).get(0).getScore());
     }
 
     @Test
@@ -88,26 +88,16 @@ public class GameBoardTest {
         player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
         player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
         player.getRouteDeck().getAllItems().add(Route.MAD_LIS);
-        assertEquals(12, gameBoard.currentScoreBoard(gameBoard.getPlayers()).get(0).getScore());
+        assertEquals(12, gameBoard.currentScore(gameBoard.getPlayers()).get(0).getScore());
     }
 
     @Test
-    public void shouldReturnPlayersWithHighestToLowestScore() throws Exception {
-        player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
-        player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
-        player.getRouteDeck().getAllItems().add(Route.MAD_LIS);
-
-        player(1).getRouteDeck().getAllItems().add(Route.LON_DIE_OPT1);
-        player(1).getRouteDeck().getAllItems().add(Route.PAM_BAR);
-        player(1).getRouteDeck().getAllItems().add(Route.MAD_LIS);
-        player(1).getRouteDeck().getAllItems().add(Route.STO_PET);
-
-        player(2).getRouteDeck().getAllItems().add(Route.MAD_LIS);
-        player(2).getRouteDeck().getAllItems().add(Route.STO_PET);
-
-        assertEquals(player(1
-        ), gameBoard.currentScoreBoard(gameBoard.getPlayers()).get(0));
+    public void shouldReturnPlayersWithHighestToLowestRouteScore() throws Exception {
+        testRoutesForThreePlayers();
+        Player[] actual = {player(1), player(0), player(2)};
+        assertArrayEquals(actual, gameBoard.currentScore(gameBoard.getPlayers()).toArray());
     }
+
 
     @Test
     public void whenPlayerTurnEndsGoToNextPlayer() throws Exception {
@@ -124,6 +114,32 @@ public class GameBoardTest {
         assertEquals(true, gameOver);
     }
 
+    @Test
+    public void shouldReturnTotalScore() throws Exception {
+        Player[] actual = {player(2), player(1), player(0)};
+        testRoutesForThreePlayers();
+        player(2).getTicketDeck().getAllItems().add(TicketCard.LON_BER);
+        TicketCard.LON_BER.setValid(true);
+        assertArrayEquals(actual, gameBoard.finalScore(gameBoard.getPlayers()).toArray());
+    }
+
+    private void testRoutesForThreePlayers() {
+        player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
+        player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
+        player.getRouteDeck().getAllItems().add(Route.PAL_SMY);
+        player.getRouteDeck().getAllItems().add(Route.ATH_SMY);
+
+        player(1).getRouteDeck().getAllItems().add(Route.LON_DIE_OPT1);
+        player(1).getRouteDeck().getAllItems().add(Route.PAM_BAR);
+        player(1).getRouteDeck().getAllItems().add(Route.MAD_LIS);
+        player(1).getRouteDeck().getAllItems().add(Route.STO_PET);
+
+        player(2).getRouteDeck().getAllItems().add(Route.LON_AMS);
+        player(2).getRouteDeck().getAllItems().add(Route.AMS_ESS);
+        player(2).getRouteDeck().getAllItems().add(Route.ESS_BER);
+        player(2).getRouteDeck().getAllItems().add(Route.BUD_KYI);
+    }
+
     private int getPlayerTrainDeckSize() {
         return player.getTrainDeck().getSize();
     }
@@ -135,4 +151,5 @@ public class GameBoardTest {
     private Player player(int index) {
         return gameBoard.getPlayers().get(index);
     }
+
 }

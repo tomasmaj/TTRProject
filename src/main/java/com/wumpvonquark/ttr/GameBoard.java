@@ -9,6 +9,8 @@ import java.util.*;
 
 public class GameBoard {
 
+    Score score;
+
     private final List<Player> players;
     private TicketDeck ticketDeck;
     private TrainDeck trainDeck, trainGarbagePile;
@@ -85,18 +87,23 @@ public class GameBoard {
         routeItems.getAllItems().remove(route);
     }
 
-    public List<Player> currentScoreBoard(List<Player> players) {
-        Score score = new Score();
+    public List<Player> currentScore(List<Player> players) {
+        score = new Score();
         for (Player p : players) {
             p.setScore(score.routesSum(getPlayerRoutes(p)));
         }
-        ComparePlayer comp = new ComparePlayer();
-        Collections.sort(players, comp);
+        getLeaderboard(players);
         return players;
     }
 
-    private Stack<Route> getPlayerRoutes(Player p) {
-        return p.getRouteDeck().getAllItems();
+    public List<Player> finalScore(List<Player> players) {
+        score = new Score();
+        currentScore(players);
+        for (Player player : players) {
+            player.setScore(player.getScore() + score.ticketSum(getPlayerTickets(player)));
+        }
+        getLeaderboard(players);
+        return players;
     }
 
     public boolean nextTurn() {
@@ -121,5 +128,18 @@ public class GameBoard {
             return true;
         }
         return false;
+    }
+
+    private void getLeaderboard(List<Player> players) {
+        ComparePlayer comp = new ComparePlayer();
+        Collections.sort(players, comp);
+    }
+
+    private Stack<Route> getPlayerRoutes(Player p) {
+        return p.getRouteDeck().getAllItems();
+    }
+
+    private Stack<TicketCard> getPlayerTickets(Player player) {
+        return player.getTicketDeck().getAllItems();
     }
 }

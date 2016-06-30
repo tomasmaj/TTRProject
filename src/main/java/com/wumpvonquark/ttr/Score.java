@@ -41,11 +41,12 @@ public class Score {
             return routeScore;
         }
 
-    public int ticketSum(TicketCard[] tickets) {
+    public int ticketSum(List<TicketCard> tickets) {
         int ticketSum = 0;
         for (TicketCard ticket : tickets) {
-            if (ticket.isValid())
-                ticketSum += ticket.getPoints();
+            if (ticket.isValid()) {
+            ticketSum += ticket.getPoints();
+        }
         }
         return ticketSum;
     }

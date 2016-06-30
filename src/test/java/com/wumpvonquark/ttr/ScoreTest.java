@@ -46,7 +46,7 @@ public class ScoreTest {
         Route[] routes = {Route.SAR_BUD, Route.SAR_SOF};
         tickets = new TicketCard[] {TicketCard.BUD_SOF};
         tickets[0].setValid(true);
-        assertEquals(11, score.routesSum(Arrays.asList(routes)) + score.ticketSum(tickets));
+        assertEquals(11, score.routesSum(Arrays.asList(routes)) + score.ticketSum(Arrays.asList(tickets)));
     }
 
     @Test
@@ -56,6 +56,6 @@ public class ScoreTest {
         for (TicketCard t : tickets) {
             t.setValid(true);
         }
-        assertEquals(29, score.routesSum(Arrays.asList(routes)) + score.ticketSum(tickets));
+        assertEquals(29, score.routesSum(Arrays.asList(routes)) + score.ticketSum(Arrays.asList(tickets)));
     }
 }
