@@ -9,7 +9,7 @@ import main.java.com.wumpvonquark.ttr.items.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Comparator {
+public class Comparator{
 
     private List<City> cities1;
     private List<City> cities2;
@@ -64,8 +64,4 @@ public class Comparator {
         doubleRoutes.add(Route.ESS_KOB_OPT2);
         return doubleRoutes;
     }
-
-//    public boolean compareCities(List<City> cities, City city1, City city2) {
-//        return (cities.contains(city1) && cities.contains(city2));
-//    }
 }

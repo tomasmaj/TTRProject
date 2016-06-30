@@ -4,6 +4,7 @@ import main.java.com.wumpvonquark.ttr.*;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,13 +16,14 @@ import static org.junit.Assert.*;
 public class GameBoardTest {
 
     private GameBoard gameBoard;
-    Player player;
+    private Player player;
 
     @Before
     public void setUp() throws Exception {
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player("PlayerName", Color.BLUE));
         playerList.add(new Player("PlayerName2", Color.RED));
+        playerList.add(new Player("PlayerName3", Color.GREEN));
         gameBoard = new GameBoard(playerList);
         gameBoard.init();
         player = player(0);
@@ -78,7 +80,7 @@ public class GameBoardTest {
     @Test
     public void playerInGameScoreShouldBeOne() throws Exception {
         player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
-        assertEquals(1, gameBoard.currentScoreBoard(gameBoard.getPlayers()));
+        assertEquals(1, gameBoard.currentScoreBoard(gameBoard.getPlayers()).get(0).getScore());
     }
 
     @Test
@@ -86,7 +88,7 @@ public class GameBoardTest {
         player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
         player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
         player.getRouteDeck().getAllItems().add(Route.MAD_LIS);
-        assertEquals(12, gameBoard.currentScoreBoard(gameBoard.getPlayers()));
+        assertEquals(12, gameBoard.currentScoreBoard(gameBoard.getPlayers()).get(0).getScore());
     }
 
     @Test
@@ -94,12 +96,17 @@ public class GameBoardTest {
         player.getRouteDeck().getAllItems().add(Route.DIE_PAR);
         player.getRouteDeck().getAllItems().add(Route.PAR_MAR);
         player.getRouteDeck().getAllItems().add(Route.MAD_LIS);
+
         player(1).getRouteDeck().getAllItems().add(Route.LON_DIE_OPT1);
         player(1).getRouteDeck().getAllItems().add(Route.PAM_BAR);
-        player(1).getRouteDeck().getAllItems().add(Route.BRU_FRA);
-        player(1).getRouteDeck().getAllItems().add(Route.WIE_BUD_RED);
-        assertEquals(player, gameBoard.currentScoreBoard(gameBoard.getPlayers()));
+        player(1).getRouteDeck().getAllItems().add(Route.MAD_LIS);
+        player(1).getRouteDeck().getAllItems().add(Route.STO_PET);
 
+        player(2).getRouteDeck().getAllItems().add(Route.MAD_LIS);
+        player(2).getRouteDeck().getAllItems().add(Route.STO_PET);
+
+        assertEquals(player(1
+        ), gameBoard.currentScoreBoard(gameBoard.getPlayers()).get(0));
     }
 
     @Test

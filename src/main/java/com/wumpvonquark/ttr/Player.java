@@ -3,7 +3,6 @@ package main.java.com.wumpvonquark.ttr;
 import main.java.com.wumpvonquark.ttr.decks.*;
 import main.java.com.wumpvonquark.ttr.items.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -15,6 +14,7 @@ public class Player {
     private TicketDeck ticketDeck;
     private StationSet stationSet;
     private RouteDeck routeDeck;
+    private int score;
 
     public Player(String name, Color color) {
         this.name = name;
@@ -24,6 +24,7 @@ public class Player {
         this.trainSet = new TrainSet();
         this.stationSet = new StationSet();
         this.routeDeck = new RouteDeck();
+        this.score = 0;
     }
 
 
@@ -53,6 +54,14 @@ public class Player {
 
     public RouteDeck getRouteDeck() {
         return routeDeck;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public void addCardToTrainDeck(List<TrainCard> tc) {

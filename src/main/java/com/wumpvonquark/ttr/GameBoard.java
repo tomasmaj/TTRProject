@@ -5,7 +5,7 @@ import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 
-import java.util.List;
+import java.util.*;
 
 public class GameBoard {
 
@@ -83,9 +83,18 @@ public class GameBoard {
         routeItems.getAllItems().remove(route);
     }
 
-    public int currentScoreBoard(List<Player> players) {
+    public List<Player> currentScoreBoard(List<Player> players) {
         Score score = new Score();
-        return score.routesSum(players.get(0).getRouteDeck().getAllItems());
+        for (Player p : players) {
+            p.setScore(score.routesSum(getPlayerRoutes(p)));
+        }
+        ComparePlayer comp = new ComparePlayer();
+        Collections.sort(players, comp);
+        return players;
+    }
+
+    private Stack<Route> getPlayerRoutes(Player p) {
+        return p.getRouteDeck().getAllItems();
     }
 
     public void nextTurn() {
