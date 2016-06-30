@@ -14,6 +14,7 @@ public class GameBoard {
     private TrainDeck trainDeck, trainGarbagePile;
     private RouteDeck routeItems;
     private int playersTurn;
+    private int lastTurn;
 
     public GameBoard(List<Player> players) {
         this.players = players;
@@ -27,6 +28,7 @@ public class GameBoard {
         this.routeItems = new RouteDeck();
         this.routeItems.generate();
         this.trainGarbagePile = new TrainDeck();
+        this.lastTurn = -1;
     }
 
     public TicketDeck getTicketDeck() {
@@ -97,10 +99,27 @@ public class GameBoard {
         return p.getRouteDeck().getAllItems();
     }
 
-    public void nextTurn() {
+    public boolean nextTurn() {
+
+        boolean gameOver = isGameOver();
+
         if(playersTurn == players.size() - 1)
             this.playersTurn = 0;
         else
             this.playersTurn++;
+
+        return gameOver;
+    }
+
+    private boolean isGameOver() {
+        Player currentPlayer = players.get(playersTurn);
+        if(currentPlayer.getTrainSet().getAllItems().size() <= 2 && lastTurn == -1) {
+            lastTurn = players.size() - 1;
+        } else if(lastTurn > 0) {
+            lastTurn--;
+        } else if(lastTurn == 0) {
+            return true;
+        }
+        return false;
     }
 }
