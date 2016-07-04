@@ -117,7 +117,6 @@ public class GameBoard {
             addCardsToGarbageDeck(usedCardsToClaimWith);
 
             for(TrainCard tc : trainCardsToClaimWith) {
-                System.out.println(tc.getColor());
                 if((tc.getColor() == route.getColor() || tc.getColor() == Color.OPTIONAL || tc.getColor() == colorToUseWhenOptional) && numberOfCardsToBeClaimed > 0) {
                     numberOfCardsToBeClaimed--;
                     usedCardsToClaimWith.add(tc);
