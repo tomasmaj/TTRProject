@@ -4,6 +4,7 @@ import main.java.com.wumpvonquark.ttr.decks.*;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
+import main.java.com.wumpvonquark.ttr.utilities.ComparePlayer;
 
 import java.util.*;
 
@@ -89,9 +90,8 @@ public class GameBoard {
 
     public List<Player> currentScore(List<Player> players) {
         score = new Score();
-        for (Player p : players) {
+        for (Player p : players)
             p.setScore(score.routesSum(getPlayerRoutes(p)));
-        }
         getLeaderboard(players);
         return players;
     }
@@ -99,9 +99,8 @@ public class GameBoard {
     public List<Player> finalScore(List<Player> players) {
         score = new Score();
         currentScore(players);
-        for (Player player : players) {
+        for (Player player : players)
             player.setScore(player.getScore() + score.ticketSum(getPlayerTickets(player)));
-        }
         getLeaderboard(players);
         return players;
     }

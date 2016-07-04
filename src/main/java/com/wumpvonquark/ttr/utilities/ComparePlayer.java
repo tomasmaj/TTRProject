@@ -1,8 +1,10 @@
-package main.java.com.wumpvonquark.ttr;
+package main.java.com.wumpvonquark.ttr.utilities;
+
+import main.java.com.wumpvonquark.ttr.Player;
 
 import java.util.Comparator;
 
-class ComparePlayer implements Comparator<Player> {
+public class ComparePlayer implements Comparator<Player> {
 
     @Override
     public int compare(Player p1, Player p2) {
