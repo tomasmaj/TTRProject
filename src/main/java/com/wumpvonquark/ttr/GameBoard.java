@@ -79,13 +79,61 @@ public class GameBoard {
 
     public void addCardsToGarbageDeck(List<TrainCard> usedTrainCards) {
         this.trainGarbagePile.getAllItems().addAll(usedTrainCards);
+        usedTrainCards.clear();
     }
 
-    public void claimRoute(Route route) {
-        List<TrainCard> tc = players.get(playersTurn).getTrainDeck().getCardsWithColor(route.getColor(), route.getLength());
-        addCardsToGarbageDeck(tc);
-        players.get(playersTurn).addRouteToRoutesDeck(route);
-        routeItems.getAllItems().remove(route);
+    public boolean claimRoute(Route route, List<TrainCard> trainCardsToClaimWith, Color colorToUseWhenOptional) {
+        if(isCardsValidForRoute(route, trainCardsToClaimWith, colorToUseWhenOptional)) {
+            players.get(playersTurn).addRouteToRoutesDeck(route);
+            routeItems.getAllItems().remove(route);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isCardsValidForRoute(Route route, List<TrainCard> trainCardsToClaimWith, Color colorToUseWhenOptional) {
+
+        int numberOfCardsToBeClaimed = route.getLength() + route.getFerry();
+        List<TrainCard> usedCardsToClaimWith = new ArrayList<>();
+        int ferryToGo = route.getFerry();
+
+        if(colorToUseWhenOptional == null) {
+            colorToUseWhenOptional = route.getColor();
+        }
+
+        if(trainCardsToClaimWith.size() >= route.getLength()) {
+
+            while(ferryToGo > 0) {
+                for(TrainCard tc : trainCardsToClaimWith) {
+                    if(tc.getColor() == Color.OPTIONAL) {
+                        ferryToGo--;
+                        numberOfCardsToBeClaimed--;
+                        usedCardsToClaimWith.add(tc);
+                    }
+                }
+            }
+
+            trainCardsToClaimWith.removeAll(usedCardsToClaimWith);
+            addCardsToGarbageDeck(usedCardsToClaimWith);
+
+            for(TrainCard tc : trainCardsToClaimWith) {
+                System.out.println(tc.getColor());
+                if((tc.getColor() == route.getColor() || tc.getColor() == Color.OPTIONAL || tc.getColor() == colorToUseWhenOptional) && numberOfCardsToBeClaimed > 0) {
+                    numberOfCardsToBeClaimed--;
+                    usedCardsToClaimWith.add(tc);
+                }
+            }
+
+            trainCardsToClaimWith.removeAll(usedCardsToClaimWith);
+            addCardsToGarbageDeck(usedCardsToClaimWith);
+
+        }
+
+        if(numberOfCardsToBeClaimed == 0) {
+            return true;
+        }
+
+        return false;
     }
 
     public List<Player> currentScore(List<Player> players) {
@@ -107,9 +155,6 @@ public class GameBoard {
             player.setScore(player.getScore() + score.ticketSum(getPlayerTickets(player)));
         List<Player> sortedPlayers = new ArrayList<>();
         sortedPlayers.addAll(getLeaderboard(currentStanding));
-        for(Player player : sortedPlayers) {
-            System.out.println(player.getName() + " : " + player.getScore());
-        }
         return sortedPlayers;
     }
 

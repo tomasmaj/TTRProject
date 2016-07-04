@@ -66,8 +66,8 @@ public class GameBoardTest {
 
     @Test
     public void playerShouldClaimTrainRoute() throws Exception {
-        player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 4));
-        gameBoard.claimRoute(Route.AMS_ESS);
+        player.addCardToTrainDeck(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 3));
+        assertTrue(gameBoard.claimRoute(Route.AMS_ESS, player.getTrainDeck().getAllItems(), null));
         assertTrue(player.getRouteDeck().getAllItems().contains(Route.AMS_ESS));
     }
 
