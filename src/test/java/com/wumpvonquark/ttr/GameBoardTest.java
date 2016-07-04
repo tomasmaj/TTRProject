@@ -108,8 +108,10 @@ public class GameBoardTest {
 
     @Ignore
     @Test
-    public void checkIfGameIsOver() throws Exception {
+    public void checkIfGameIsOverWithFourPlayers() throws Exception {
         player.getTrainSet().getItems(44);
+        gameBoard.nextTurn();
+        gameBoard.nextTurn();
         gameBoard.nextTurn();
         gameBoard.nextTurn();
         boolean gameOver = gameBoard.nextTurn();
