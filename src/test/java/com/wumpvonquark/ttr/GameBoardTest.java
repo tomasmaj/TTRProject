@@ -106,7 +106,6 @@ public class GameBoardTest {
         assertEquals("PlayerName2", gameBoard.getPlayers().get(1).getName());
     }
 
-    @Ignore
     @Test
     public void checkIfGameIsOverWithFourPlayers() throws Exception {
         player.getTrainSet().getItems(44);
