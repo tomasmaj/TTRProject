@@ -15,6 +15,12 @@ public class Rules {
     public static final int numberOfStartTrains = 45;
     public static final int numberOfStartStations = 3;
 
+    private Color optionalColor;
+
+    public void setOptionalColor(Color color) {
+        this.optionalColor = color;
+    }
+
     public boolean isTicketValid(TicketCard ticket, List<Route> routes) {
         return connectedCities(ticket.getStartCity(), routes).contains(ticket.getEndCity());
     }
@@ -49,5 +55,25 @@ public class Rules {
             }
         }
         return numbersInDeck;
+    }
+
+    public int getRouteCost(Route route, List<TrainCard> drawnCards) {
+        int cost = route.getLength();
+        if (route.isTunnel()) {
+            for (TrainCard tc : drawnCards) {
+                if (tc.getColor().equals(getRouteColor(route)))
+                    cost++;
+            }
+        }
+        return cost;
+    }
+
+    private Color getRouteColor(Route route) {
+        Color color;
+        if (route.getColor().equals(Color.OPTIONAL))
+            color = optionalColor;
+        else
+            color = route.getColor();
+        return color;
     }
 }

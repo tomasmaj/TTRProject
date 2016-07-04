@@ -7,11 +7,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class StartTest {
-
-    @Test
-    public void enterPlayerWithColor() {
-        Start start = new Start();
-        Player player = start.addPlayers();
-        Assert.assertEquals(Color.RED, player.getColor());
-    }
+//
+//    @Test
+//    public void enterPlayerWithColor() {
+//        Start start = new Start();
+//        Player player = start.addPlayers();
+//        Assert.assertEquals(Color.RED, player.getColor());
+//    }
 }

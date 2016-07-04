@@ -83,4 +83,8 @@ public class Player {
     public void addRouteToRoutesDeck(Route route) {
         this.routeDeck.getAllItems().add(route);
     }
+
+    public void discardTickets(List<TicketCard> removeCards) {
+        this.getTicketDeck().getAllItems().removeAll(removeCards);
+    }
 }
