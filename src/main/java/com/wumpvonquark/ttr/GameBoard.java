@@ -12,7 +12,7 @@ public class GameBoard {
 
     Score score;
 
-    private final List<Player> players;
+    private List<Player> players;
     private TicketDeck ticketDeck;
     private TrainDeck trainDeck, trainGarbagePile;
     private RouteDeck routeItems;
@@ -90,19 +90,27 @@ public class GameBoard {
 
     public List<Player> currentScore(List<Player> players) {
         score = new Score();
-        for (Player p : players)
+        List<Player> tempPlayers = new ArrayList<>();
+        tempPlayers.addAll(players);
+        for (Player p : tempPlayers)
             p.setScore(score.routesSum(getPlayerRoutes(p)));
-        getLeaderboard(players);
-        return players;
+        List<Player> sortedPlayers = new ArrayList<>();
+        sortedPlayers.addAll(getLeaderboard(tempPlayers));
+        return sortedPlayers;
     }
 
     public List<Player> finalScore(List<Player> players) {
         score = new Score();
-        currentScore(players);
-        for (Player player : players)
+        List<Player> currentStanding = new ArrayList<>();
+        currentStanding.addAll(currentScore(players));
+        for (Player player : currentStanding)
             player.setScore(player.getScore() + score.ticketSum(getPlayerTickets(player)));
-        getLeaderboard(players);
-        return players;
+        List<Player> sortedPlayers = new ArrayList<>();
+        sortedPlayers.addAll(getLeaderboard(currentStanding));
+        for(Player player : sortedPlayers) {
+            System.out.println(player.getName() + " : " + player.getScore());
+        }
+        return sortedPlayers;
     }
 
     public boolean nextTurn() {
@@ -129,9 +137,11 @@ public class GameBoard {
         return false;
     }
 
-    private void getLeaderboard(List<Player> players) {
+    private List<Player> getLeaderboard(List<Player> players) {
         ComparePlayer comp = new ComparePlayer();
-        Collections.sort(players, comp);
+        List<Player> tempPlayers = players;
+        Collections.sort(tempPlayers, comp);
+        return tempPlayers;
     }
 
     private Stack<Route> getPlayerRoutes(Player p) {
