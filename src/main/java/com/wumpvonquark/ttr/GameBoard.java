@@ -20,6 +20,8 @@ public class GameBoard {
     private int playersTurn;
     private int lastTurn;
 
+    private TrainDeck fiveCardTrainDeck;
+
     public GameBoard(List<Player> players) {
         this.players = players;
         this.playersTurn = 0;
@@ -32,6 +34,7 @@ public class GameBoard {
         this.routeItems = new RouteDeck();
         this.routeItems.generate();
         this.trainGarbagePile = new TrainDeck();
+        this.fiveCardTrainDeck = new TrainDeck();
         this.lastTurn = -1;
     }
 
@@ -69,12 +72,24 @@ public class GameBoard {
             player.addCardToTicketDeck(this.ticketDeck.getItems(Rules.numberOfStartTicketCards));
             player.addTrainsToTrainSet(ts.getItems(Rules.numberOfStartTrains));
             player.addStationsToStationSet(ss.getItems(Rules.numberOfStartStations));
+            addToFiveCardTrainDeck();
         }
+    }
+
+    public TrainDeck getFiveCardTrainDeck() {
+        return fiveCardTrainDeck;
     }
 
     public void dealTrainCard(List<TrainCard> tc) {
         players.get(playersTurn).addCardToTrainDeck((tc));
-        trainDeck.getAllItems().removeAll(tc);
+        fiveCardTrainDeck.getAllItems().removeAll(tc);
+        addToFiveCardTrainDeck();
+    }
+
+    private void addToFiveCardTrainDeck() {
+        while(fiveCardTrainDeck.getSize() < 5) {
+            fiveCardTrainDeck.getAllItems().addAll(trainDeck.getItems(1));
+        }
     }
 
     public void addCardsToGarbageDeck(List<TrainCard> usedTrainCards) {
@@ -163,7 +178,7 @@ public class GameBoard {
 
     public boolean nextTurn() {
         boolean gameOver = isGameOver();
-        this.playersTurn = (playersTurn == players.size() - 1) ? 0 : this.playersTurn++;
+        this.playersTurn = (playersTurn == players.size() - 1) ? 0 : ++this.playersTurn;
         return gameOver;
     }
 
