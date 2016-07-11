@@ -70,7 +70,7 @@ public class Rules {
     }
 
     public boolean haveTrainCardsForFerryRoute() {
-        routeCost = checkRoute.getFerry();
+        routeCost = routeCost - checkRoute.getFerry();
         List<TrainCard> removeOptionals = new ArrayList<>();
         for (TrainCard trainCard : checkDeck) {
             if (removeOptionals.size() < checkRoute.getFerry() && isOptional(trainCard))
@@ -90,11 +90,11 @@ public class Rules {
     }
 
     private Color getRouteColor() {
-        return isOptionalColor(checkRoute.getColor()) ? optionalColor :  checkRoute.getColor();
+        return isOptional(checkRoute.getColor()) ? optionalColor :  checkRoute.getColor();
     }
 
     private Color getTrainCardColor(TrainCard trainCard) {
-        return isOptionalColor(trainCard.getColor()) ? optionalColor :  trainCard.getColor();
+        return isOptional(trainCard.getColor()) ? optionalColor :  trainCard.getColor();
     }
 
     public boolean isValidColor(TrainCard t) {

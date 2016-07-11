@@ -112,8 +112,10 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.OPTIONAL));
         drawnCards.add(new TrainCard(Color.OPTIONAL));
         rules.setCheckRoute(Route.PAL_SMY);
+        rules.setCheckRoute(Route.LON_AMS);
         rules.setCheckDeck(drawnCards);
         rules.setOptionalColor(Color.RED);
+        rules.setRouteCost(Route.LON_AMS.getLength());
         assertTrue(rules.haveTrainCardsForFerryRoute());
     }
 }

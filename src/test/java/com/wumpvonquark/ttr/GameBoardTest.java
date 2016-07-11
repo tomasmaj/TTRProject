@@ -24,9 +24,9 @@ public class GameBoardTest {
     public void setUp() throws Exception {
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player("PlayerName", Color.BLUE));
-//        playerList.add(new Player("PlayerName2", Color.RED));
-//        playerList.add(new Player("PlayerName3", Color.GREEN));
-//        playerList.add(new Player("PlayerName4", Color.YELLOW));
+        playerList.add(new Player("PlayerName2", Color.RED));
+        playerList.add(new Player("PlayerName3", Color.GREEN));
+        playerList.add(new Player("PlayerName4", Color.YELLOW));
         gameBoard = new GameBoard(playerList);
         gameBoard.init();
         player = playerIndex(0);
@@ -113,6 +113,9 @@ public class GameBoardTest {
 
     @Test
     public void shouldReturnTotalScore() throws Exception {
+        for (Player player : gameBoard.getPlayers()) {
+            player.getTicketDeck().getAllItems().clear();
+        }
         addPlayerRoutes();
         playerIndex(3).getTicketDeck().getAllItems().add(TicketCard.LON_BER);
         TicketCard.LON_BER.setValid(true);
@@ -166,7 +169,7 @@ public class GameBoardTest {
     public void claimTunnelRoute() throws Exception {
         List<TrainCard> claimCards = new ArrayList<>();
         claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.WHITE, 3));
-        //claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 2));
+        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 3));
         assertTrue(gameBoard.claimRoute(Route.PAM_MAD_WHITE, claimCards, Color.WHITE));
     }
 }
