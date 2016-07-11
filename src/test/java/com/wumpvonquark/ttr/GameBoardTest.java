@@ -1,12 +1,10 @@
 package test.java.com.wumpvonquark.ttr;
 
-import com.sun.org.apache.regexp.internal.RE;
 import main.java.com.wumpvonquark.ttr.*;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -55,13 +53,11 @@ public class GameBoardTest {
         List<TrainCard> tc = new ArrayList<>();
         tc.add(getAllItemsFromGameBoardTrainDeck().get(0));
         tc.add(getAllItemsFromGameBoardTrainDeck().get(2));
-
-        int gameBoardDeckSize = gameBoard.getTrainDeck().getSize();
         int playerDeckSize = getPlayerTrainDeckSize();
 
         gameBoard.dealTrainCard(tc);
 
-        assertEquals(gameBoardDeckSize - tc.size(), getAllItemsFromGameBoardTrainDeck().size());
+        assertEquals(5, getAllItemsFromGameBoardTrainDeck().size());
         assertEquals(playerDeckSize + tc.size(), getPlayerTrainDeckSize());
 
     }
@@ -150,7 +146,7 @@ public class GameBoardTest {
     }
 
     private Stack<TrainCard> getAllItemsFromGameBoardTrainDeck() {
-        return gameBoard.getTrainDeck().getAllItems();
+        return gameBoard.getFiveCardTrainDeck().getAllItems();
     }
 
     private Player playerIndex(int index) {
