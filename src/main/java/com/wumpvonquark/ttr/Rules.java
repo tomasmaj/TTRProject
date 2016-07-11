@@ -102,10 +102,10 @@ public class Rules {
     }
 
     private boolean isOptional(TrainCard trainCard) {
-        return trainCard.getColor() == Color.OPTIONAL;
+        return isOptional(trainCard.getColor());
     }
 
-    private boolean isOptionalColor(Color color) {
+    private boolean isOptional(Color color) {
         return color.equals(Color.OPTIONAL);
     }
 
