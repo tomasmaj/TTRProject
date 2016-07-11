@@ -55,6 +55,7 @@ public class GameBoardTest {
         List<TrainCard> tc = new ArrayList<>();
         tc.add(getAllItemsFromGameBoardTrainDeck().get(0));
         tc.add(getAllItemsFromGameBoardTrainDeck().get(2));
+
         int gameBoardDeckSize = gameBoard.getTrainDeck().getSize();
         int playerDeckSize = getPlayerTrainDeckSize();
 

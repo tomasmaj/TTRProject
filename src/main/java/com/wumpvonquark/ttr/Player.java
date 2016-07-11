@@ -28,6 +28,30 @@ public class Player {
     }
 
 
+    public void addCardToTrainDeck(List<TrainCard> tc) {
+        this.trainDeck.getAllItems().addAll(tc);
+    }
+
+    public void addCardToTicketDeck(List<TicketCard> tc) {
+        this.ticketDeck.getAllItems().addAll(tc);
+    }
+
+    public void addTrainsToTrainSet(List<TrainPiece> tp) {
+        this.trainSet.getAllItems().addAll(tp);
+    }
+
+    public void addStationsToStationSet(List<StationPiece> sp) {
+        this.stationSet.getAllItems().addAll(sp);
+    }
+
+    public void addRouteToRoutesDeck(Route route) {
+        this.routeDeck.getAllItems().add(route);
+    }
+
+    public void discardTickets(List<TicketCard> removeCards) {
+        this.getTicketDeck().getAllItems().removeAll(removeCards);
+    }
+
     public String getName() {
         return name;
     }
@@ -62,29 +86,5 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public void addCardToTrainDeck(List<TrainCard> tc) {
-        this.trainDeck.getAllItems().addAll(tc);
-    }
-
-    public void addCardToTicketDeck(List<TicketCard> tc) {
-        this.ticketDeck.getAllItems().addAll(tc);
-    }
-
-    public void addTrainsToTrainSet(List<TrainPiece> tp) {
-        this.trainSet.getAllItems().addAll(tp);
-    }
-
-    public void addStationsToStationSet(List<StationPiece> sp) {
-        this.stationSet.getAllItems().addAll(sp);
-    }
-
-    public void addRouteToRoutesDeck(Route route) {
-        this.routeDeck.getAllItems().add(route);
-    }
-
-    public void discardTickets(List<TicketCard> removeCards) {
-        this.getTicketDeck().getAllItems().removeAll(removeCards);
     }
 }

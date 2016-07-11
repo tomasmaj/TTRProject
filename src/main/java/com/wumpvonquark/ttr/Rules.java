@@ -24,7 +24,6 @@ public class Rules {
         this.checkDeck = new ArrayList<>();
     }
 
-
     public boolean isTicketValid(TicketCard ticket, List<Route> playerRoutes) {
         return connectedCities(ticket.getStartCity(), playerRoutes).contains(ticket.getEndCity());
     }
