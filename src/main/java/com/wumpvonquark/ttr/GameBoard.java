@@ -11,6 +11,7 @@ import java.util.*;
 public class GameBoard {
 
     Score score;
+    Rules rules;
 
     private List<Player> players;
     private TicketDeck ticketDeck;
@@ -69,7 +70,6 @@ public class GameBoard {
             player.addTrainsToTrainSet(ts.getItems(Rules.numberOfStartTrains));
             player.addStationsToStationSet(ss.getItems(Rules.numberOfStartStations));
         }
-
     }
 
     public void dealTrainCard(List<TrainCard> tc) {
@@ -82,15 +82,62 @@ public class GameBoard {
         usedTrainCards.clear();
     }
 
-    public boolean claimRoute(Route route, List<TrainCard> trainCardsToClaimWith, Color colorToUseWhenOptional) {
-        if(isCardsValidForRoute(route, trainCardsToClaimWith, colorToUseWhenOptional)) {
-            players.get(playersTurn).addRouteToRoutesDeck(route);
-            routeItems.getAllItems().remove(route);
+    public boolean claimRoute(Route route, List<TrainCard> trainCardsToClaimWith, Color optionalColor) {
+        if (players.get(playersTurn).getTrainSet().getSize() < route.getLength())
+            return false;
+        rules = new Rules();
+        rules.setOptionalColor(optionalColor);
+        rules.setCheckRoute(route);
+        rules.setCheckDeck(trainCardsToClaimWith);
+
+        if (route.getFerry() > 0) {
+            System.out.println("Ferry");
+            if (rules.haveTrainCardsForFerryRoute()) {
+                List<TrainCard> removeOptionals = new ArrayList<>();
+                for (int i = 0; i < route.getFerry(); i++) {
+                    if (trainCardsToClaimWith.get(i).getColor().equals(Color.OPTIONAL))
+                        removeOptionals.add(trainCardsToClaimWith.get(i));
+                }
+                trainCardsToClaimWith.removeAll(removeOptionals);
+                playTrainCards(trainCardsToClaimWith);
+                discardTrainPieces(route);
+                return true;
+            }
+        }
+
+        if (route.isTunnel()) {
+            System.out.println("Tunnel");
+            rules.setTunnelRouteCost(trainDeck.getItems(3));
+        }
+        System.out.println("Route cost: " + rules.getRouteCost());
+        if (rules.haveTrainCardsForRoute()) {
+            System.out.println("Normal");
+            playTrainCards(trainCardsToClaimWith);
+            discardTrainPieces(route);
             return true;
         }
         return false;
     }
 
+    private void discardTrainPieces(Route route) {
+        players.get(playersTurn).addRouteToRoutesDeck(route);
+        players.get(playersTurn).getTrainSet().getAllItems().removeAll(players.get(playersTurn).getTrainSet().getItems(rules.getRouteCost()));
+        routeItems.getAllItems().remove(route);
+    }
+
+    private void playTrainCards(List<TrainCard> trainCardsToClaimWith) {
+        List<TrainCard> useCards = new ArrayList<>();
+        int counter = 0;
+        for (TrainCard trainCard : trainCardsToClaimWith){
+            if (rules.isValidColor(trainCard) && counter < rules.getRouteCost()) {
+                useCards.add(trainCard);
+                counter++;
+            }
+        }
+        trainCardsToClaimWith.removeAll(useCards);
+        addCardsToGarbageDeck(useCards);
+    }
+/*
     private boolean isCardsValidForRoute(Route route, List<TrainCard> trainCardsToClaimWith, Color colorToUseWhenOptional) {
 
         int numberOfCardsToBeClaimed = route.getLength() + route.getFerry();
@@ -105,7 +152,7 @@ public class GameBoard {
 
             while(ferryToGo > 0) {
                 for(TrainCard tc : trainCardsToClaimWith) {
-                    if(tc.getColor() == Color.OPTIONAL) {
+                    if(tc.getColor().equals(Color.OPTIONAL)) {
                         ferryToGo--;
                         numberOfCardsToBeClaimed--;
                         usedCardsToClaimWith.add(tc);
@@ -123,49 +170,42 @@ public class GameBoard {
                 }
             }
 
+
             trainCardsToClaimWith.removeAll(usedCardsToClaimWith);
             addCardsToGarbageDeck(usedCardsToClaimWith);
 
         }
 
-        if(numberOfCardsToBeClaimed == 0) {
-            return true;
-        }
-
-        return false;
+        return numberOfCardsToBeClaimed == 0;
     }
+*/
 
-    public List<Player> currentScore(List<Player> players) {
+    public List<Player> setCurrentScore() {
         score = new Score();
-        List<Player> tempPlayers = new ArrayList<>();
-        tempPlayers.addAll(players);
-        for (Player p : tempPlayers)
+        for (Player p : getPlayers())
             p.setScore(score.routesSum(getPlayerRoutes(p)));
-        List<Player> sortedPlayers = new ArrayList<>();
-        sortedPlayers.addAll(getLeaderboard(tempPlayers));
-        return sortedPlayers;
+        return getLeaderboard();
     }
 
-    public List<Player> finalScore(List<Player> players) {
+    public List<Player> setFinalScore() {
         score = new Score();
-        List<Player> currentStanding = new ArrayList<>();
-        currentStanding.addAll(currentScore(players));
-        for (Player player : currentStanding)
+        setCurrentScore();
+        for (Player player : getPlayers())
             player.setScore(player.getScore() + score.ticketSum(getPlayerTickets(player)));
-        List<Player> sortedPlayers = new ArrayList<>();
-        sortedPlayers.addAll(getLeaderboard(currentStanding));
-        return sortedPlayers;
+        return getLeaderboard();
+    }
+
+    private List<Player> getLeaderboard() {
+        ComparePlayer comp = new ComparePlayer();
+        List<Player> tempPlayers = new ArrayList<>();
+        tempPlayers.addAll(getPlayers());
+        Collections.sort(tempPlayers, comp);
+        return tempPlayers;
     }
 
     public boolean nextTurn() {
-
         boolean gameOver = isGameOver();
-
-        if(playersTurn == players.size() - 1)
-            this.playersTurn = 0;
-        else
-            this.playersTurn++;
-
+        this.playersTurn = (playersTurn == players.size() - 1) ? 0 : this.playersTurn++;
         return gameOver;
     }
 
@@ -179,13 +219,6 @@ public class GameBoard {
             return true;
         }
         return false;
-    }
-
-    private List<Player> getLeaderboard(List<Player> players) {
-        ComparePlayer comp = new ComparePlayer();
-        List<Player> tempPlayers = players;
-        Collections.sort(tempPlayers, comp);
-        return tempPlayers;
     }
 
     private Stack<Route> getPlayerRoutes(Player p) {

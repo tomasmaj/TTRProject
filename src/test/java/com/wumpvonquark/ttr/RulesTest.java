@@ -59,11 +59,13 @@ public class RulesTest {
 
     @Test
     public void shouldReturnFullTunnelRouteCost() throws Exception {
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
         drawnCards.add(new TrainCard(Color.BLACK));
-        drawnCards.add(new TrainCard(Color.BLACK));
-        drawnCards.add(new TrainCard(Color.BLACK));
-
-        assertEquals(11, rules.getRouteCost(Route.STO_PET, drawnCards));
+        rules.setOptionalColor(Color.BLACK);
+        rules.setCheckRoute(Route.STO_PET);
+        rules.setTunnelRouteCost(drawnCards);
+        assertEquals(11, rules.getRouteCost());
     }
 
     @Test
@@ -72,6 +74,46 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.RED));
         drawnCards.add(new TrainCard(Color.GREEN));
         rules.setOptionalColor(Color.BLACK);
-        assertEquals(9, rules.getRouteCost(Route.STO_PET, drawnCards));
+        rules.setCheckRoute(Route.STO_PET);
+        rules.setTunnelRouteCost(drawnCards);
+        assertEquals(9, rules.getRouteCost());
+    }
+
+    @Test
+    public void trainCardColorShouldBeSameAsRouteColorAndRightAmount() throws Exception {
+        drawnCards.add(new TrainCard(Color.RED));
+        drawnCards.add(new TrainCard(Color.YELLOW));
+        drawnCards.add(new TrainCard(Color.YELLOW));
+        drawnCards.add(new TrainCard(Color.YELLOW));
+        drawnCards.add(new TrainCard(Color.GREEN));
+        rules.setCheckRoute(Route.AMS_ESS);
+        rules.setCheckDeck(drawnCards);
+        assertTrue(rules.haveTrainCardsForRoute());
+    }
+
+    @Test
+    public void shouldClaimRouteWithOptionalTrainCard() throws Exception {
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
+        rules.setCheckRoute(Route.AMS_ESS);
+        rules.setCheckDeck(drawnCards);
+        rules.setOptionalColor(Color.YELLOW);
+        assertTrue(rules.haveTrainCardsForRoute());
+    }
+
+    @Test
+    public void haveOptionalTrainCardsToClaimFerryRoute() throws Exception {
+        drawnCards.add(new TrainCard(Color.RED));
+        drawnCards.add(new TrainCard(Color.RED));
+        drawnCards.add(new TrainCard(Color.RED));
+        drawnCards.add(new TrainCard(Color.RED));
+        drawnCards.add(new TrainCard(Color.YELLOW));
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
+        drawnCards.add(new TrainCard(Color.OPTIONAL));
+        rules.setCheckRoute(Route.PAL_SMY);
+        rules.setCheckDeck(drawnCards);
+        rules.setOptionalColor(Color.RED);
+        assertTrue(rules.haveTrainCardsForFerryRoute());
     }
 }
