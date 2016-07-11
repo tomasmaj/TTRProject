@@ -64,16 +64,9 @@ public class Rules {
     public void setTunnelRouteCost(List<TrainCard> drawnCards) {
         routeCost = checkRoute.getLength();
         for (TrainCard trainCard : drawnCards) {
-            if (trainCard.getColor().equals(getRouteColor()))
+            if (trainCard.getColor().equals(getRouteColor()) || trainCard.getColor().equals(Color.OPTIONAL))
                 routeCost++;
         }
-    }
-
-    public boolean haveTrainCardsForRoute() {
-        for (TrainCard trainCard : checkDeck) {
-            routeCost -= isValidColor(trainCard) ? 1 : 0;
-        }
-        return routeCost <= 0;
     }
 
     public boolean haveTrainCardsForFerryRoute() {
@@ -87,6 +80,13 @@ public class Rules {
             return false;
         checkDeck.removeAll(removeOptionals);
         return haveTrainCardsForRoute();
+    }
+
+    public boolean haveTrainCardsForRoute() {
+        for (TrainCard trainCard : checkDeck) {
+            routeCost -= isValidColor(trainCard) ? 1 : 0;
+        }
+        return routeCost <= 0;
     }
 
     private Color getRouteColor() {
