@@ -8,7 +8,6 @@ import main.java.com.wumpvonquark.ttr.decks.TrainDeck;
 import main.java.com.wumpvonquark.ttr.items.Item;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
-import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import main.java.com.wumpvonquark.ttr.utilities.Comparator;
 import org.junit.Before;
 import org.junit.Test;

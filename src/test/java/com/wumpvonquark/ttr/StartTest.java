@@ -1,11 +1,5 @@
 package test.java.com.wumpvonquark.ttr;
 
-import main.java.com.wumpvonquark.ttr.Color;
-import main.java.com.wumpvonquark.ttr.Player;
-import main.java.com.wumpvonquark.ttr.Start;
-import org.junit.Assert;
-import org.junit.Test;
-
 public class StartTest {
 //
 //    @Test
