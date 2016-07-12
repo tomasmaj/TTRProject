@@ -118,4 +118,27 @@ public class RulesTest {
         rules.setRouteCost(Route.LON_AMS.getLength());
         assertTrue(rules.haveTrainCardsForFerryRoute());
     }
+
+    @Test
+    public void shouldCountDrawnTrainCards() throws Exception {
+        rules.setDrawnCards(0);
+        List<TrainCard> hand = new ArrayList<>();
+        TrainCard trainCard1 = new TrainCard(Color.GREEN);
+        TrainCard trainCard2 = new TrainCard(Color.OPTIONAL);
+        TrainCard trainCard3 = new TrainCard(Color.RED);
+        if (rules.drawCards(trainCard1)) {
+            hand.add(trainCard1);
+        }
+        if (rules.drawCards(trainCard2)) {
+            hand.add(trainCard2);
+        }
+        if (rules.drawCards(trainCard3)) {
+            hand.add(trainCard3);
+        }
+        for (TrainCard t : hand) {
+            System.out.println(t.getColor());
+        }
+
+        assertEquals(2, hand.size());
+    }
 }
