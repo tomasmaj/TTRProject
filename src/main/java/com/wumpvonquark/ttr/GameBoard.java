@@ -90,6 +90,14 @@ public class GameBoard {
         addToFiveCardTrainDeck();
     }
 
+    public void dealTrainCard(TrainCard tc) {
+        TrainCard dealtCard = fiveCardTrainDeck.getAllItems().get(fiveCardTrainDeck.getAllItems().indexOf(tc));
+        List<TrainCard> tcList = new ArrayList<>();
+        tcList.add(dealtCard);
+        players.get(playersTurn).addCardToTrainDeck((tcList));
+        addToFiveCardTrainDeck();
+    }
+
     private void addToFiveCardTrainDeck() {
         while(fiveCardTrainDeck.getSize() < 5) {
             fiveCardTrainDeck.getAllItems().addAll(trainDeck.getItems(1));
