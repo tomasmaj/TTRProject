@@ -110,8 +110,10 @@ public class GameBoard {
             if (rules.haveTrainCardsForFerryRoute()) {
                 List<TrainCard> optionalsForFerryRoute = new ArrayList<>();
                 for (int i = 0; i < route.getFerry(); i++) {
-                    if (rules.isOptional(trainCardsToClaimWith.get(i)))
+                    if (rules.isOptional(trainCardsToClaimWith.get(i))) {
+                        System.out.println("");
                         optionalsForFerryRoute.add(trainCardsToClaimWith.get(i));
+                    }
                 }
                 trainCardsToClaimWith.removeAll(optionalsForFerryRoute);
                 useTrainCards(trainCardsToClaimWith);
@@ -148,6 +150,7 @@ public class GameBoard {
     private void useTrainCards(List<TrainCard> trainCardsToClaimWith) {
         List<TrainCard> useCards = new ArrayList<>();
         int counter = 0;
+        System.out.println(rules.getRouteCost());
         for (TrainCard trainCard : trainCardsToClaimWith){
             if (rules.isValidColor(trainCard) && counter < rules.getRouteCost()) {
                 useCards.add(trainCard);

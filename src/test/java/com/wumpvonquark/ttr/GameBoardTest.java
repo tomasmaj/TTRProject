@@ -158,15 +158,15 @@ public class GameBoardTest {
         List<TrainCard> claimCards = new ArrayList<>();
         claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 6));
         claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 2));
-        gameBoard.claimRoute(Route.PAL_SMY, claimCards, Color.YELLOW);
+        gameBoard.claimRoute(Route.LON_AMS, claimCards, Color.YELLOW);
         assertEquals(Route.PAL_SMY, gameBoard.getPlayers().get(0).getRouteDeck().getAllItems().get(0));
     }
 
     @Test
     public void claimTunnelRoute() throws Exception {
         List<TrainCard> claimCards = new ArrayList<>();
-        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.WHITE, 3));
-        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 3));
+        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.WHITE, 4));
+        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 4));
         assertTrue(gameBoard.claimRoute(Route.PAM_MAD_WHITE, claimCards, Color.WHITE));
     }
 

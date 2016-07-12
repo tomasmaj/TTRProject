@@ -83,10 +83,11 @@ public class Rules {
     }
 
     public boolean haveTrainCardsForRoute() {
+        int counter = routeCost;
         for (TrainCard trainCard : trainCardDeck) {
-            routeCost -= isValidColor(trainCard) ? 1 : 0;
+            counter -= isValidColor(trainCard) ? 1 : 0;
         }
-        return routeCost <= 0;
+        return counter <= 0;
     }
 
     private Color getRouteColor() {
