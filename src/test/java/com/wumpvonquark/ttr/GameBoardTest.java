@@ -169,4 +169,54 @@ public class GameBoardTest {
         claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 3));
         assertTrue(gameBoard.claimRoute(Route.PAM_MAD_WHITE, claimCards, Color.WHITE));
     }
+
+    @Test
+    public void checkThatGameWorks() throws Exception {
+        Player player1 = new Player("Name1", Color.BLACK);
+        Player player2 = new Player("Name2", Color.YELLOW);
+        Player player3 = new Player("Name3", Color.WHITE);
+
+        List<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+
+        GameBoard gameBoard = new GameBoard(players);
+        gameBoard.init();
+
+        System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + "'s tur...");
+
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(2));
+
+        gameBoard.nextTurn();
+
+        System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + "'s tur...");
+
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(2));
+
+        gameBoard.nextTurn();
+
+        System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + "'s tur...");
+
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(5));
+
+        System.out.println("Före");
+        for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
+            System.out.println(tc.getColor());
+
+        if(gameBoard.claimRoute(Route.LON_AMS, gameBoard.getPlayerTurn().getTrainDeck().getAllItems(), Color.YELLOW)) {
+            System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + " tar route " + Route.LON_AMS.getCity1() + "-" + Route.LON_AMS.getCity2());
+        }
+
+        System.out.println("Efter");
+        for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
+            System.out.println(tc.getColor());
+
+        gameBoard.nextTurn();
+
+        System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + "'s tur...");
+
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(1));
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(1));
+    }
 }
