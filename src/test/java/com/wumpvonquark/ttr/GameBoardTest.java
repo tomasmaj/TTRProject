@@ -200,15 +200,15 @@ public class GameBoardTest {
 
         gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(5));
 
-        System.out.println("Före");
+        System.out.println("Före är antal kort: " + gameBoard.getPlayerTurn().getTrainDeck().getSize());
         for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
             System.out.println(tc.getColor());
 
-        if(gameBoard.claimRoute(Route.LON_AMS, gameBoard.getPlayerTurn().getTrainDeck().getAllItems(), Color.YELLOW)) {
+        if(gameBoard.claimRoute(Route.LON_AMS, gameBoard.getPlayerTurn().getTrainDeck().getAllItems(), Color.OPTIONAL)) {
             System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + " tar route " + Route.LON_AMS.getCity1() + "-" + Route.LON_AMS.getCity2());
         }
 
-        System.out.println("Efter");
+        System.out.println("Efter är antal kort: " + gameBoard.getPlayerTurn().getTrainDeck().getSize());
         for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
             System.out.println(tc.getColor());
 
@@ -216,7 +216,19 @@ public class GameBoardTest {
 
         System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + "'s tur...");
 
-        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(1));
-        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(1));
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(5));
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(5));
+
+        System.out.println("Före är antal kort: " + gameBoard.getPlayerTurn().getTrainDeck().getSize());
+        for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
+            System.out.println(tc.getColor());
+
+        if(gameBoard.claimRoute(Route.PAM_BAR, gameBoard.getPlayerTurn().getTrainDeck().getAllItems(), Color.YELLOW)) {
+            System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + " tar route " + Route.PAM_BAR.getCity1() + "-" + Route.PAM_BAR.getCity2());
+        }
+
+        System.out.println("Efter är antal kort: " + gameBoard.getPlayerTurn().getTrainDeck().getSize());
+        for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
+            System.out.println(tc.getColor());
     }
 }
