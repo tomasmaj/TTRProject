@@ -63,7 +63,7 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.OPTIONAL));
         drawnCards.add(new TrainCard(Color.BLACK));
         rules.setOptionalColor(Color.BLACK);
-        rules.setCheckRoute(Route.STO_PET);
+        rules.setRoute(Route.STO_PET);
         rules.setTunnelRouteCost(drawnCards);
         assertEquals(11, rules.getRouteCost());
     }
@@ -74,7 +74,7 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.RED));
         drawnCards.add(new TrainCard(Color.GREEN));
         rules.setOptionalColor(Color.BLACK);
-        rules.setCheckRoute(Route.STO_PET);
+        rules.setRoute(Route.STO_PET);
         rules.setTunnelRouteCost(drawnCards);
         assertEquals(9, rules.getRouteCost());
     }
@@ -86,8 +86,8 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.YELLOW));
         drawnCards.add(new TrainCard(Color.YELLOW));
         drawnCards.add(new TrainCard(Color.GREEN));
-        rules.setCheckRoute(Route.AMS_ESS);
-        rules.setCheckDeck(drawnCards);
+        rules.setRoute(Route.AMS_ESS);
+        rules.setTrainCardDeck(drawnCards);
         assertTrue(rules.haveTrainCardsForRoute());
     }
 
@@ -96,8 +96,8 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.OPTIONAL));
         drawnCards.add(new TrainCard(Color.OPTIONAL));
         drawnCards.add(new TrainCard(Color.OPTIONAL));
-        rules.setCheckRoute(Route.AMS_ESS);
-        rules.setCheckDeck(drawnCards);
+        rules.setRoute(Route.AMS_ESS);
+        rules.setTrainCardDeck(drawnCards);
         rules.setOptionalColor(Color.YELLOW);
         assertTrue(rules.haveTrainCardsForRoute());
     }
@@ -111,9 +111,9 @@ public class RulesTest {
         drawnCards.add(new TrainCard(Color.YELLOW));
         drawnCards.add(new TrainCard(Color.OPTIONAL));
         drawnCards.add(new TrainCard(Color.OPTIONAL));
-        rules.setCheckRoute(Route.PAL_SMY);
-        rules.setCheckRoute(Route.LON_AMS);
-        rules.setCheckDeck(drawnCards);
+        rules.setRoute(Route.PAL_SMY);
+        rules.setRoute(Route.LON_AMS);
+        rules.setTrainCardDeck(drawnCards);
         rules.setOptionalColor(Color.RED);
         rules.setRouteCost(Route.LON_AMS.getLength());
         assertTrue(rules.haveTrainCardsForFerryRoute());

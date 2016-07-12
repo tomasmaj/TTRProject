@@ -157,7 +157,7 @@ public class GameBoardTest {
     public void claimFerryRoute() throws Exception {
         List<TrainCard> claimCards = new ArrayList<>();
         claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.YELLOW, 6));
-        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 3));
+        claimCards.addAll(gameBoard.getTrainDeck().getCardsWithColor(Color.OPTIONAL, 2));
         gameBoard.claimRoute(Route.PAL_SMY, claimCards, Color.YELLOW);
         assertEquals(Route.PAL_SMY, gameBoard.getPlayers().get(0).getRouteDeck().getAllItems().get(0));
     }

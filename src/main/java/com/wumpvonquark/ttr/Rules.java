@@ -15,13 +15,13 @@ public class Rules {
     public static final int numberOfStartTrains = 45;
     public static final int numberOfStartStations = 3;
 
-    private List<TrainCard> checkDeck;
-    private Route checkRoute;
+    private List<TrainCard> trainCardDeck;
+    private Route route;
     private Color optionalColor;
     private int routeCost;
 
     public Rules() {
-        this.checkDeck = new ArrayList<>();
+        this.trainCardDeck = new ArrayList<>();
     }
 
     public boolean isTicketValid(TicketCard ticket, List<Route> playerRoutes) {
@@ -61,7 +61,7 @@ public class Rules {
     }
 
     public void setTunnelRouteCost(List<TrainCard> drawnCards) {
-        routeCost = checkRoute.getLength();
+        routeCost = route.getLength();
         for (TrainCard trainCard : drawnCards) {
             if (trainCard.getColor().equals(getRouteColor()) || trainCard.getColor().equals(Color.OPTIONAL))
                 routeCost++;
@@ -69,27 +69,28 @@ public class Rules {
     }
 
     public boolean haveTrainCardsForFerryRoute() {
-        routeCost = routeCost - checkRoute.getFerry();
-        List<TrainCard> removeOptionals = new ArrayList<>();
-        for (TrainCard trainCard : checkDeck) {
-            if (removeOptionals.size() < checkRoute.getFerry() && isOptional(trainCard))
-                removeOptionals.add(trainCard);
+        routeCost = routeCost - route.getFerry();
+        List<TrainCard> optionalsForFerryRoute = new ArrayList<>();
+        for (TrainCard trainCard : trainCardDeck) {
+            if (optionalsForFerryRoute.size() < route.getFerry() && isOptional(trainCard)) {
+                optionalsForFerryRoute.add(trainCard);
+            }
         }
-        if (removeOptionals.size() < checkRoute.getFerry())
+        if (optionalsForFerryRoute.size() < route.getFerry())
             return false;
-        checkDeck.removeAll(removeOptionals);
+        trainCardDeck.removeAll(optionalsForFerryRoute);
         return haveTrainCardsForRoute();
     }
 
     public boolean haveTrainCardsForRoute() {
-        for (TrainCard trainCard : checkDeck) {
+        for (TrainCard trainCard : trainCardDeck) {
             routeCost -= isValidColor(trainCard) ? 1 : 0;
         }
         return routeCost <= 0;
     }
 
     private Color getRouteColor() {
-        return isOptional(checkRoute.getColor()) ? optionalColor :  checkRoute.getColor();
+        return isOptional(route.getColor()) ? optionalColor :  route.getColor();
     }
 
     private Color getTrainCardColor(TrainCard trainCard) {
@@ -100,7 +101,7 @@ public class Rules {
         return getRouteColor().equals(getTrainCardColor(t));
     }
 
-    private boolean isOptional(TrainCard trainCard) {
+    public boolean isOptional(TrainCard trainCard) {
         return isOptional(trainCard.getColor());
     }
 
@@ -121,11 +122,11 @@ public class Rules {
         this.routeCost = routeCost;
     }
 
-    public void setCheckDeck(List<TrainCard> checkDeck) {
-        this.checkDeck.addAll(checkDeck);
+    public void setTrainCardDeck(List<TrainCard> trainCardDeck) {
+        this.trainCardDeck.addAll(trainCardDeck);
     }
 
-    public void setCheckRoute(Route checkRoute) {
-        this.checkRoute = checkRoute;
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

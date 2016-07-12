@@ -108,13 +108,13 @@ public class GameBoard {
 
         if (route.getFerry() > 0) {
             if (rules.haveTrainCardsForFerryRoute()) {
-                List<TrainCard> removeOptionals = new ArrayList<>();
+                List<TrainCard> optionalsForFerryRoute = new ArrayList<>();
                 for (int i = 0; i < route.getFerry(); i++) {
-                    if (trainCardsToClaimWith.get(i).getColor().equals(Color.OPTIONAL))
-                        removeOptionals.add(trainCardsToClaimWith.get(i));
+                    if (rules.isOptional(trainCardsToClaimWith.get(i)))
+                        optionalsForFerryRoute.add(trainCardsToClaimWith.get(i));
                 }
-                trainCardsToClaimWith.removeAll(removeOptionals);
-                playTrainCards(trainCardsToClaimWith);
+                trainCardsToClaimWith.removeAll(optionalsForFerryRoute);
+                useTrainCards(trainCardsToClaimWith);
                 discardTrainPieces(route);
                 return true;
             }
@@ -124,7 +124,7 @@ public class GameBoard {
             rules.setTunnelRouteCost(trainDeck.getItems(3));
         }
         if (rules.haveTrainCardsForRoute()) {
-            playTrainCards(trainCardsToClaimWith);
+            useTrainCards(trainCardsToClaimWith);
             discardTrainPieces(route);
             return true;
         }
@@ -134,8 +134,8 @@ public class GameBoard {
     private void initializeRules(Route route, List<TrainCard> trainCardsToClaimWith, Color optionalColor) {
         rules = new Rules();
         rules.setOptionalColor(optionalColor);
-        rules.setCheckRoute(route);
-        rules.setCheckDeck(trainCardsToClaimWith);
+        rules.setRoute(route);
+        rules.setTrainCardDeck(trainCardsToClaimWith);
         rules.setRouteCost(route.getLength());
     }
 
@@ -145,7 +145,7 @@ public class GameBoard {
         routeItems.getAllItems().remove(route);
     }
 
-    private void playTrainCards(List<TrainCard> trainCardsToClaimWith) {
+    private void useTrainCards(List<TrainCard> trainCardsToClaimWith) {
         List<TrainCard> useCards = new ArrayList<>();
         int counter = 0;
         for (TrainCard trainCard : trainCardsToClaimWith){
