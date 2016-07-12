@@ -109,9 +109,14 @@ public class GameBoard {
         if (route.getFerry() > 0) {
             if (rules.haveTrainCardsForFerryRoute()) {
                 List<TrainCard> optionalsForFerryRoute = new ArrayList<>();
-                for (int i = 0; i < route.getFerry(); i++) {
-                    if (rules.isOptional(trainCardsToClaimWith.get(i)))
-                        optionalsForFerryRoute.add(trainCardsToClaimWith.get(i));
+                int ferry = 0;
+                int index = 0;
+                while(ferry < route.getFerry()) {
+                    if (rules.isOptional(trainCardsToClaimWith.get(index))) {
+                        optionalsForFerryRoute.add(trainCardsToClaimWith.get(index));
+                        ferry++;
+                    }
+                    index++;
                 }
                 trainCardsToClaimWith.removeAll(optionalsForFerryRoute);
                 useTrainCards(trainCardsToClaimWith);
