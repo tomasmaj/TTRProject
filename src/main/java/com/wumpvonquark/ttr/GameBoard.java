@@ -80,9 +80,13 @@ public class GameBoard {
         return fiveCardTrainDeck;
     }
 
+    public Player getPlayerTurn() {
+        return players.get(playersTurn);
+    }
+
     public void dealTrainCard(List<TrainCard> tc) {
         players.get(playersTurn).addCardToTrainDeck((tc));
-        fiveCardTrainDeck.getAllItems().removeAll(tc);
+        //fiveCardTrainDeck.getAllItems().removeAll(tc);
         addToFiveCardTrainDeck();
     }
 
@@ -114,6 +118,7 @@ public class GameBoard {
                 discardTrainPieces(route);
                 return true;
             }
+            return false;
         }
         if (route.isTunnel()) {
             rules.setTunnelRouteCost(trainDeck.getItems(3));
