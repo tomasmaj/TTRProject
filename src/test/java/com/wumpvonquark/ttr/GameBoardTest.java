@@ -198,7 +198,8 @@ public class GameBoardTest {
 
         System.out.println("Spelare " + gameBoard.getPlayerTurn().getName() + "'s tur...");
 
-        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(5));
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(1));
+        gameBoard.dealTrainCard(gameBoard.getFiveCardTrainDeck().getItems(1));
 
         System.out.println("Före är antal kort: " + gameBoard.getPlayerTurn().getTrainDeck().getSize());
         for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
@@ -230,5 +231,8 @@ public class GameBoardTest {
         System.out.println("Efter är antal kort: " + gameBoard.getPlayerTurn().getTrainDeck().getSize());
         for(TrainCard tc : gameBoard.getPlayerTurn().getTrainDeck().getAllItems())
             System.out.println(tc.getColor());
+
+        gameBoard.nextTurn();
+
     }
 }
