@@ -133,6 +133,7 @@ public class GameBoard {
                 useTrainCards(trainCardsToClaimWith);
                 discardTrainPieces(route);
                 rules.setMoves(3);
+                activateTicket();
                 return true;
             }
             return false;
@@ -144,6 +145,7 @@ public class GameBoard {
             useTrainCards(trainCardsToClaimWith);
             discardTrainPieces(route);
             rules.setMoves(3);
+            activateTicket();
             return true;
         }
         return false;
@@ -175,6 +177,12 @@ public class GameBoard {
         }
         trainCardsToClaimWith.removeAll(useCards);
         addCardsToGarbageDeck(useCards);
+    }
+
+    public void activateTicket() {
+        for (TicketCard ticket : players.get(playersTurn).getTicketDeck().getAllItems()) {
+            ticket.setValid(rules.isTicketValid(ticket, getPlayerRoutes(players.get(playersTurn))));
+        }
     }
 
     public List<Player> setCurrentScore() {
@@ -229,7 +237,7 @@ public class GameBoard {
         }
     }
 
-    private Stack<Route> getPlayerRoutes(Player p) {
+    private List<Route> getPlayerRoutes(Player p) {
         return p.getRouteDeck().getAllItems();
     }
 

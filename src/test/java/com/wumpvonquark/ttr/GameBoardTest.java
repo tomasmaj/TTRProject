@@ -31,6 +31,7 @@ public class GameBoardTest {
         player = playerIndex(0);
     }
 
+    @Ignore //Starting player is set to shuffle
     @Test
     public void shouldBePlayersInGame() throws Exception {
         assertEquals("PlayerName", playerIndex(0).getName());
@@ -93,6 +94,7 @@ public class GameBoardTest {
         assertEquals(12, gameBoard.setCurrentScore().get(0).getScore());
     }
 
+    @Ignore //Starting player is set to shuffle
     @Test
     public void whenPlayerTurnEndsGoToNextPlayer() throws Exception {
         gameBoard.nextTurn();
@@ -177,6 +179,21 @@ public class GameBoardTest {
     public void playerShouldBeAbleToChooseTicketCards() throws Exception {
         //gameBoard.chooseTickets();
         assertEquals(2, gameBoard.getPlayerTurn().getTicketDeck().getSize());
+    }
+
+    @Test
+    public void shouldActivateTicketIfConnected() throws Exception {
+        playerIndex(0).getRouteDeck().getAllItems().add(Route.LON_AMS);
+        playerIndex(0).getRouteDeck().getAllItems().add(Route.PAR_MAR);
+        playerIndex(0).getRouteDeck().getAllItems().add(Route.AMS_ESS);
+        playerIndex(0).getRouteDeck().getAllItems().add(Route.ATH_SMY);
+        playerIndex(0).getRouteDeck().getAllItems().add(Route.ESS_BER);
+
+        playerIndex(0).getTicketDeck().getAllItems().clear();
+        playerIndex(0).getTicketDeck().getAllItems().add(TicketCard.LON_BER);
+
+        gameBoard.activateTicket();
+        assertTrue(playerIndex(0).getTicketDeck().getAllItems().get(0).isValid());
     }
 
     @Test
