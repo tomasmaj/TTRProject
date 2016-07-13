@@ -141,6 +141,7 @@ public class GameBoard {
         if (route.isTunnel()) {
             rules.setTunnelRouteCost(trainDeck.getItems(3));
         }
+
         if (rules.haveTrainCardsForRoute()) {
             useTrainCards(trainCardsToClaimWith);
             discardTrainPieces(route);

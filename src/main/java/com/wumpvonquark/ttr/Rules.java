@@ -149,6 +149,7 @@ public class Rules {
     }
 
     public void setTrainCardDeck(List<TrainCard> trainCardDeck) {
+        this.trainCardDeck.clear();
         this.trainCardDeck.addAll(trainCardDeck);
     }
 

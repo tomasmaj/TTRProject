@@ -110,8 +110,6 @@ public class Start {
                 color = setColor(choosenColor);
             }
 
-
-
             if(gameBoard.claimRoute(route, playerTrainCards, color)) {
                 System.out.println("You claimed the " + route.getCity1() + " to " + route.getCity2() + " route!");
             } else {
