@@ -5,7 +5,6 @@ import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import main.java.com.wumpvonquark.ttr.utilities.ComparePlayer;
-import org.omg.CORBA.TCKind;
 
 import java.util.*;
 
@@ -214,9 +213,9 @@ public class GameBoard {
         return false;
     }
 
-    public void chooseTickets(List<TicketCard> ticketsToDiscard) {
+    public void discardTickets(List<TicketCard> ticketsToDiscard) {
         if (rules.discardTicket(ticketsToDiscard, getPlayerTurn().getTicketDeck().getSize())) {
-            getPlayerTurn().discardTickets(ticketsToDiscard);
+            getPlayerTurn().removeTickets(ticketsToDiscard);
         }
     }
 

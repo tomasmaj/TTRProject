@@ -173,7 +173,7 @@ public class GameBoardTest {
 
     @Test
     public void playerShouldBeAbleToChooseTicketCards() throws Exception {
-        gameBoard.chooseTickets();
+        gameBoard.discardTickets();
         assertEquals(2, gameBoard.getPlayerTurn().getTicketDeck().getSize());
     }
 

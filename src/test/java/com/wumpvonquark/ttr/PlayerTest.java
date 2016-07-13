@@ -43,7 +43,7 @@ public class PlayerTest {
         List<TicketCard> removeCards = new ArrayList<>();
         removeCards.add(TicketCard.BER_MOS);
         removeCards.add(TicketCard.LON_BER);
-        player.discardTickets(removeCards);
+        player.removeTickets(removeCards);
         assertEquals(TicketCard.FRA_SMO, player.getTicketDeck().getAllItems().get(0));
     }
 }

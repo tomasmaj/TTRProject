@@ -92,7 +92,6 @@ public class Rules {
         return counter <= 0;
     }
 
-
     public boolean drawCards(TrainCard trainCard) {
         if (isOptional(trainCard)) {
             if (drawnCards != 0)
