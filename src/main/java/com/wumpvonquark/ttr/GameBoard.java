@@ -24,6 +24,7 @@ public class GameBoard {
 
     public GameBoard(List<Player> players) {
         this.players = players;
+        Collections.shuffle(this.players);
         this.playersTurn = 0;
         this.ticketDeck = new TicketDeck();
         this.ticketDeck.generate();

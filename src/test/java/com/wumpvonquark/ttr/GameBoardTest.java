@@ -55,10 +55,11 @@ public class GameBoardTest {
         tc.add(getAllItemsFromGameBoardTrainDeck().get(2));
         int playerDeckSize = getPlayerTrainDeckSize();
 
+        gameBoard.dealTrainCard(getAllItemsFromGameBoardTrainDeck().get(1));
         gameBoard.dealTrainCard(tc);
 
         assertEquals(5, getAllItemsFromGameBoardTrainDeck().size());
-        assertEquals(playerDeckSize + tc.size(), getPlayerTrainDeckSize());
+        assertEquals(playerDeckSize + tc.size() + 1, getPlayerTrainDeckSize());
 
     }
 
