@@ -19,7 +19,7 @@ public class Rules {
     private Route route;
     private Color optionalColor;
     private int routeCost;
-    private int drawnCards;
+    private int moves = 0;
 
     public Rules() {
         this.trainCardDeck = new ArrayList<>();
@@ -113,22 +113,22 @@ public class Rules {
 
     public boolean drawCards(TrainCard trainCard) {
         if (isOptional(trainCard)) {
-            if (drawnCards != 0) return false;
-            drawnCards += 2;
+            if (moves != 0) return false;
+            moves += 2;
         }
         else
-            drawnCards++;
-        return drawnCards < 3;
+            moves++;
+        return moves < 3;
     }
 
     // Getters and Setters
 
-    public int getDrawnCards() {
-        return drawnCards;
+    public int getMoves() {
+        return moves;
     }
 
-    public void setDrawnCards(int drawnCards) {
-        this.drawnCards = drawnCards;
+    public void setMoves(int moves) {
+        this.moves = moves;
     }
 
     public void setOptionalColor(Color color) {
