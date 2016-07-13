@@ -20,7 +20,7 @@ public class Rules {
     private Route route;
     private Color optionalColor;
     private int routeCost;
-    private int drawnCards;
+    private int moves = 0;
 
     public Rules() {
         this.trainCardDeck = new ArrayList<>();
@@ -92,17 +92,6 @@ public class Rules {
         return counter <= 0;
     }
 
-    public boolean drawCards(TrainCard trainCard) {
-        if (isOptional(trainCard)) {
-            if (drawnCards != 0)
-                return false;
-            drawnCards += 2;
-        }
-        else
-            drawnCards++;
-        return drawnCards < 3;
-    }
-
     public boolean discardTicket(List<TicketCard> ticketsToDiscard, int numberOfTickets) {
         return numberOfTickets - ticketsToDiscard.size() < 1;
     }
@@ -127,13 +116,24 @@ public class Rules {
         return color.equals(Color.OPTIONAL);
     }
 
-    // Getters and Setters
-    public int getDrawnCards() {
-        return drawnCards;
+    public boolean drawCards(TrainCard trainCard) {
+        if (isOptional(trainCard)) {
+            if (moves != 0) return false;
+            moves += 2;
+        }
+        else
+            moves++;
+        return moves < 3;
     }
 
-    public void setDrawnCards(int drawnCards) {
-        this.drawnCards = drawnCards;
+    // Getters and Setters
+
+    public int getMoves() {
+        return moves;
+    }
+
+    public void setMoves(int moves) {
+        this.moves = moves;
     }
 
     public void setOptionalColor(Color color) {
@@ -155,5 +155,4 @@ public class Rules {
     public void setRoute(Route route) {
         this.route = route;
     }
-
 }

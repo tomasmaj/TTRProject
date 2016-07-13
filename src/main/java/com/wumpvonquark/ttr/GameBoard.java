@@ -23,6 +23,7 @@ public class GameBoard {
     private TrainDeck fiveCardTrainDeck;
 
     public GameBoard(List<Player> players) {
+        rules = new Rules();
         this.players = players;
         Collections.shuffle(this.players);
         this.playersTurn = 0;
@@ -87,16 +88,17 @@ public class GameBoard {
 
     public void dealTrainCard(List<TrainCard> tc) {
         players.get(playersTurn).addCardToTrainDeck((tc));
-        //fiveCardTrainDeck.getAllItems().removeAll(tc);
         addToFiveCardTrainDeck();
     }
 
     public void dealTrainCard(TrainCard tc) {
-        TrainCard dealtCard = fiveCardTrainDeck.getAllItems().get(fiveCardTrainDeck.getAllItems().indexOf(tc));
-        List<TrainCard> tcList = new ArrayList<>();
-        tcList.add(dealtCard);
-        players.get(playersTurn).addCardToTrainDeck((tcList));
-        addToFiveCardTrainDeck();
+        if(rules.drawCards(tc)) {
+            TrainCard dealtCard = fiveCardTrainDeck.getAllItems().remove(fiveCardTrainDeck.getAllItems().indexOf(tc));
+            List<TrainCard> tcList = new ArrayList<>();
+            tcList.add(dealtCard);
+            players.get(playersTurn).addCardToTrainDeck((tcList));
+            addToFiveCardTrainDeck();
+        }
     }
 
     private void addToFiveCardTrainDeck() {
@@ -130,6 +132,7 @@ public class GameBoard {
                 trainCardsToClaimWith.removeAll(optionalsForFerryRoute);
                 useTrainCards(trainCardsToClaimWith);
                 discardTrainPieces(route);
+                rules.setMoves(3);
                 return true;
             }
             return false;
@@ -140,13 +143,13 @@ public class GameBoard {
         if (rules.haveTrainCardsForRoute()) {
             useTrainCards(trainCardsToClaimWith);
             discardTrainPieces(route);
+            rules.setMoves(3);
             return true;
         }
         return false;
     }
 
     private void initializeRules(Route route, List<TrainCard> trainCardsToClaimWith, Color optionalColor) {
-        rules = new Rules();
         rules.setOptionalColor(optionalColor);
         rules.setRoute(route);
         rules.setTrainCardDeck(trainCardsToClaimWith);
@@ -155,7 +158,9 @@ public class GameBoard {
 
     private void discardTrainPieces(Route route) {
         players.get(playersTurn).addRouteToRoutesDeck(route);
-        players.get(playersTurn).getTrainSet().getAllItems().removeAll(players.get(playersTurn).getTrainSet().getItems(rules.getRouteCost()));
+        for(int i = 0; i < rules.getRouteCost(); i++) {
+            players.get(playersTurn).getTrainSet().getAllItems().pop();
+        }
         routeItems.getAllItems().remove(route);
     }
 
@@ -198,7 +203,12 @@ public class GameBoard {
     public boolean nextTurn() {
         boolean gameOver = isGameOver();
         this.playersTurn = (playersTurn == players.size() - 1) ? 0 : ++this.playersTurn;
+        this.rules.setMoves(0);
         return gameOver;
+    }
+
+    public boolean getMovesLeft() {
+        return rules.getMoves() < 2;
     }
 
     private boolean isGameOver() {

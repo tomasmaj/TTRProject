@@ -121,7 +121,7 @@ public class RulesTest {
 
     @Test
     public void shouldCountDrawnTrainCards() throws Exception {
-        rules.setDrawnCards(0);
+        rules.setMoves(0);
         List<TrainCard> hand = new ArrayList<>();
         TrainCard trainCard1 = new TrainCard(Color.GREEN);
         TrainCard trainCard2 = new TrainCard(Color.OPTIONAL);
