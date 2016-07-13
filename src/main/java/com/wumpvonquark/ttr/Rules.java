@@ -1,5 +1,6 @@
 package main.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.decks.TicketDeck;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
@@ -89,6 +90,10 @@ public class Rules {
             counter -= isValidColor(trainCard) ? 1 : 0;
         }
         return counter <= 0;
+    }
+
+    public boolean discardTicket(List<TicketCard> ticketsToDiscard, int numberOfTickets) {
+        return numberOfTickets - ticketsToDiscard.size() < 1;
     }
 
     private Color getRouteColor() {

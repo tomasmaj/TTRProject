@@ -5,6 +5,7 @@ import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
 import main.java.com.wumpvonquark.ttr.utilities.ComparePlayer;
+import org.omg.CORBA.TCKind;
 
 import java.util.*;
 
@@ -60,6 +61,14 @@ public class GameBoard {
         return trainGarbagePile;
     }
 
+    public TrainDeck getFiveCardTrainDeck() {
+        return fiveCardTrainDeck;
+    }
+
+    public Player getPlayerTurn() {
+        return players.get(playersTurn);
+    }
+
     public void init() {
 
         TrainSet ts = new TrainSet();
@@ -76,14 +85,6 @@ public class GameBoard {
             player.addStationsToStationSet(ss.getItems(Rules.numberOfStartStations));
             addToFiveCardTrainDeck();
         }
-    }
-
-    public TrainDeck getFiveCardTrainDeck() {
-        return fiveCardTrainDeck;
-    }
-
-    public Player getPlayerTurn() {
-        return players.get(playersTurn);
     }
 
     public void dealTrainCard(List<TrainCard> tc) {
@@ -223,6 +224,12 @@ public class GameBoard {
         return false;
     }
 
+    public void chooseTickets(List<TicketCard> ticketsToDiscard) {
+        if (rules.discardTicket(ticketsToDiscard, getPlayerTurn().getTicketDeck().getSize())) {
+            getPlayerTurn().discardTickets(ticketsToDiscard);
+        }
+    }
+
     private Stack<Route> getPlayerRoutes(Player p) {
         return p.getRouteDeck().getAllItems();
     }
@@ -230,4 +237,5 @@ public class GameBoard {
     private Stack<TicketCard> getPlayerTickets(Player player) {
         return player.getTicketDeck().getAllItems();
     }
+
 }
