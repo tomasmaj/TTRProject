@@ -235,9 +235,9 @@ public class Start {
     public List<Player> addPlayers() {
         List<Player> players = new ArrayList<>();
         do {
-            System.out.print("Enter player name (null entry to proceed): ");
+            System.out.print("Enter player name (Type 'start' to begin): ");
             name = scan.nextLine();
-            if(name.equals("done"))
+            if(name.equals("start"))
                 break;
             System.out.println("\nChoose color:\n" +
                     "1. RED\n" +
@@ -278,7 +278,7 @@ public class Start {
             case 8:
                 return Color.ORANGE;
             default:
-                return null;
+                return Color.OPTIONAL;
         }
     }
 }
