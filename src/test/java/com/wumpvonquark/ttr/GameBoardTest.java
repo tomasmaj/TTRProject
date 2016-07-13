@@ -171,6 +171,12 @@ public class GameBoardTest {
     }
 
     @Test
+    public void playerShouldBeAbleToChooseTicketCards() throws Exception {
+        gameBoard.chooseTickets();
+        assertEquals(2, gameBoard.getPlayerTurn().getTicketDeck().getSize());
+    }
+
+    @Test
     public void checkThatGameWorks() throws Exception {
         Player player1 = new Player("Name1", Color.BLACK);
         Player player2 = new Player("Name2", Color.YELLOW);

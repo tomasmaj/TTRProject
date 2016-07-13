@@ -1,5 +1,6 @@
 package main.java.com.wumpvonquark.ttr;
 
+import main.java.com.wumpvonquark.ttr.decks.TicketDeck;
 import main.java.com.wumpvonquark.ttr.items.Route;
 import main.java.com.wumpvonquark.ttr.items.TicketCard;
 import main.java.com.wumpvonquark.ttr.items.TrainCard;
@@ -91,6 +92,22 @@ public class Rules {
         return counter <= 0;
     }
 
+
+    public boolean drawCards(TrainCard trainCard) {
+        if (isOptional(trainCard)) {
+            if (drawnCards != 0)
+                return false;
+            drawnCards += 2;
+        }
+        else
+            drawnCards++;
+        return drawnCards < 3;
+    }
+
+    public boolean discardTicket(List<TicketCard> ticketsToDiscard, int numberOfTickets) {
+        return numberOfTickets - ticketsToDiscard.size() < 1;
+    }
+
     private Color getRouteColor() {
         return isOptional(route.getColor()) ? optionalColor :  route.getColor();
     }
@@ -111,18 +128,7 @@ public class Rules {
         return color.equals(Color.OPTIONAL);
     }
 
-    public boolean drawCards(TrainCard trainCard) {
-        if (isOptional(trainCard)) {
-            if (drawnCards != 0) return false;
-            drawnCards += 2;
-        }
-        else
-            drawnCards++;
-        return drawnCards < 3;
-    }
-
     // Getters and Setters
-
     public int getDrawnCards() {
         return drawnCards;
     }
@@ -150,4 +156,5 @@ public class Rules {
     public void setRoute(Route route) {
         this.route = route;
     }
+
 }

@@ -141,4 +141,9 @@ public class RulesTest {
 
         assertEquals(2, hand.size());
     }
+
+    @Test
+    public void playerShouldBeAbleToDiscardTicketsLeavingAtLeastTwo() throws Exception {
+
+    }
 }
