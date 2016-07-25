@@ -25,6 +25,13 @@ public class Rules {
     public Rules() {
         this.trainCardDeck = new ArrayList<>();
     }
+    
+    void initializeRules(Route route, List<TrainCard> trainCardsToClaimWith, Color optionalColor) {
+        this.optionalColor = optionalColor;
+        this.route = route;
+        setTrainCardDeck(trainCardsToClaimWith);
+        routeCost = route.getLength();
+    }
 
     public boolean isTicketValid(TicketCard ticket, List<Route> playerRoutes) {
         return connectedCities(ticket.getStartCity(), playerRoutes).contains(ticket.getEndCity());

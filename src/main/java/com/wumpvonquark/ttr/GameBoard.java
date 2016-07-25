@@ -40,34 +40,6 @@ public class GameBoard {
         this.lastTurn = -1;
     }
 
-    public TicketDeck getTicketDeck() {
-        return ticketDeck;
-    }
-
-    public TrainDeck getTrainDeck() {
-        return trainDeck;
-    }
-
-    public RouteDeck getRouteItems() {
-        return routeItems;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public TrainDeck getTrainGarbagePile() {
-        return trainGarbagePile;
-    }
-
-    public TrainDeck getFiveCardTrainDeck() {
-        return fiveCardTrainDeck;
-    }
-
-    public Player getPlayerTurn() {
-        return players.get(playersTurn);
-    }
-
     public void init() {
 
         TrainSet ts = new TrainSet();
@@ -115,52 +87,54 @@ public class GameBoard {
     public boolean claimRoute(Route route, List<TrainCard> trainCardsToClaimWith, Color optionalColor) {
         if (players.get(playersTurn).getTrainSet().getSize() < route.getLength())
             return false;
-        initializeRules(route, trainCardsToClaimWith, optionalColor);
+        rules.initializeRules(route, trainCardsToClaimWith, optionalColor);
 
         if (route.getFerry() > 0) {
-            if (rules.haveTrainCardsForFerryRoute()) {
-                List<TrainCard> optionalsForFerryRoute = new ArrayList<>();
-                int ferry = 0;
-                int index = 0;
-                while(ferry < route.getFerry()) {
-                    if (rules.isOptional(trainCardsToClaimWith.get(index))) {
-                        optionalsForFerryRoute.add(trainCardsToClaimWith.get(index));
-                        ferry++;
-                    }
-                    index++;
-                }
-                trainCardsToClaimWith.removeAll(optionalsForFerryRoute);
-                useTrainCards(trainCardsToClaimWith);
-                discardTrainPieces(route);
-                rules.setMoves(3);
-                activateTicket();
-                return true;
-            }
-            return false;
+            return claimFerryRoute(route, trainCardsToClaimWith);
         }
         if (route.isTunnel()) {
             rules.setTunnelRouteCost(trainDeck.getItems(3));
         }
 
         if (rules.haveTrainCardsForRoute()) {
-            useTrainCards(trainCardsToClaimWith);
-            discardTrainPieces(route);
-            rules.setMoves(3);
-            activateTicket();
+            getClaimedRoute(route, trainCardsToClaimWith);
             return true;
         }
         return false;
     }
 
-    private void initializeRules(Route route, List<TrainCard> trainCardsToClaimWith, Color optionalColor) {
-        rules.setOptionalColor(optionalColor);
-        rules.setRoute(route);
-        rules.setTrainCardDeck(trainCardsToClaimWith);
-        rules.setRouteCost(route.getLength());
+    private boolean claimFerryRoute(Route route, List<TrainCard> trainCardsToClaimWith) {
+        if (rules.haveTrainCardsForFerryRoute()) {
+            trainCardsToClaimWith.removeAll(removeOptionalsForFerry(route, trainCardsToClaimWith));
+            getClaimedRoute(route, trainCardsToClaimWith);
+            return true;
+        }
+        return false;
+    }
+    
+    private List<TrainCard> removeOptionalsForFerry(Route route, List<TrainCard> trainCardsToClaimWith) {
+        List<TrainCard> optionalsForFerryRoute = new ArrayList<>();
+        int ferry = 0;
+        int index = 0;
+        while(ferry < route.getFerry()) {
+            if (rules.isOptional(trainCardsToClaimWith.get(index))) {
+                optionalsForFerryRoute.add(trainCardsToClaimWith.get(index));
+                ferry++;
+            }
+            index++;
+        }
+        return optionalsForFerryRoute;
+    }
+    
+    private void getClaimedRoute(Route route, List<TrainCard> trainCardsToClaimWith) {
+        useTrainCards(trainCardsToClaimWith);
+        players.get(playersTurn).addRouteToRoutesDeck(route);
+        discardTrainPieces(route);
+        rules.setMoves(3);
+        activateTicket();
     }
 
     private void discardTrainPieces(Route route) {
-        players.get(playersTurn).addRouteToRoutesDeck(route);
         for(int i = 0; i < rules.getRouteCost(); i++) {
             players.get(playersTurn).getTrainSet().getAllItems().pop();
         }
@@ -244,6 +218,35 @@ public class GameBoard {
 
     private Stack<TicketCard> getPlayerTickets(Player player) {
         return player.getTicketDeck().getAllItems();
+    }
+
+// Getters and setters
+    public TicketDeck getTicketDeck() {
+        return ticketDeck;
+    }
+
+    public TrainDeck getTrainDeck() {
+        return trainDeck;
+    }
+
+    public RouteDeck getRouteItems() {
+        return routeItems;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public TrainDeck getTrainGarbagePile() {
+        return trainGarbagePile;
+    }
+
+    public TrainDeck getFiveCardTrainDeck() {
+        return fiveCardTrainDeck;
+    }
+
+    public Player getPlayerTurn() {
+        return players.get(playersTurn);
     }
 
 }
